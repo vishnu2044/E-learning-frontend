@@ -2,16 +2,16 @@ import React from 'react'
 
 const MentorSignupForm = () => {
   return (
-    <form  class="flex flex-col gap-4 pb-4 w-full" data-hs-cf-bound="true">
+    <form  class="flex flex-col  gap-4 pb-2 w-full" >
         <h1 class="mb-4 text-2xl font-bold text-center">Mentor Sign Up</h1>
 
-    {/* First section 3 inputs in one line */}
+    {/* First section 1 input in one line username section */}
         <div className='flex justify-between gap-3 w-full'>
 
-            <div>
+            <div className='w-full'>
                 <div class="mb-2">
-                    <label class="text-sm font-medium text-gray-900 dark:text-gray-600"
-                        for="email">Username</label>
+                    <label class="text-sm font-medium text-gray-950 dark:text-gray-600"
+                        >Username</label>
                 </div>
                 <div class="flex w-full rounded-lg pt-1">
                     <div class="relative w-full">
@@ -23,7 +23,14 @@ const MentorSignupForm = () => {
                 </div>
             </div>
 
-            <div>
+
+        </div>
+    
+    {/* Second section 2 inputs in one line Full name */}
+        <div className='flex justify-between gap-3 w-full'>
+
+
+            <div className='w-1/2'>
                 <div class="mb-2">
                     <label class="text-sm font-medium text-gray-900 dark:text-gray-600"
                         for="email">First Name</label>
@@ -38,16 +45,16 @@ const MentorSignupForm = () => {
                 </div>
             </div>
 
-            <div>
+            <div className='w-1/2'>
                 <div class="mb-2">
                     <label class="text-sm font-medium text-gray-900 dark:text-gray-600"
-                        for="email">Username</label>
+                        for="email">Last Name</label>
                 </div>
                 <div class="flex w-full rounded-lg pt-1">
                     <div class="relative w-full">
                         <input
                             class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500   p-2.5 text-sm rounded-lg"
-                            id="username" type="text" name="username" placeholder="Enter Username"
+                            id="lastname" type="text" name="lastname" placeholder="Enter Last Name"
                             />
                     </div>
                 </div>
@@ -55,68 +62,59 @@ const MentorSignupForm = () => {
 
         </div>
         
-    {/* First section 2 inputs in one line */}
+    {/* Third section 2 inputs in one line email */}
         <div className='flex gap-3 w-full'>
-            <div className='w-1/2'>
+            <div className='w-full'>
                 <div class="mb-2">
                     <label class="text-sm font-medium text-gray-900 dark:text-gray-600"
-                        for="email">Userndfgdsfame</label>
+                        for="email">Email</label>
                 </div>
                 <div class="flex w-full rounded-lg pt-1">
                     <div class="relative w-full">
                         <input
                             class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500   p-2.5 text-sm rounded-lg"
-                            id="username" type="text" name="username" placeholder="Enter Username"
+                            id="email" type="text" name="email" placeholder="Enter your email"
                         />
                     </div>
                 </div>
             </div>
 
   
-            <div className='w-1/2'>
-                <div class="mb-2">
-                    <label class="text-sm font-medium text-gray-900 dark:text-gray-600"
-                        for="email">Usedfgdsrname</label>
-                </div>
-                <div class="flex w-full rounded-lg pt-1">
-                    <div class="relative w-full">
-                        <input
-                            class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500   p-2.5 text-sm rounded-lg"
-                            id="username" type="text" name="username" placeholder="Enter Username"
-                        />
-                    </div>
-                </div>
-            </div>
         </div>
 
-    {/* First section 1 input in one line */}
-        <div>
+    {/* Fourth section 1 input in one line */}
+    <div className='flex justify-between gap-3 w-full'>
+
+        <div className='w-1/2'>
             <div class="mb-2">
                 <label class="text-sm font-medium text-gray-900 dark:text-gray-600"
-                    for="email">Usernamsdfsde</label>
+                    for="email">Password</label>
             </div>
             <div class="flex w-full rounded-lg pt-1">
-                <div class="relative w-full"><input
+                <div class="relative w-full">
+                    <input
                         class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500   p-2.5 text-sm rounded-lg"
-                        id="username" type="text" name="username" placeholder="Enter Username"
+                        id="passwrod1" type="password" name="passwrod1" placeholder="Enter your passwrod"
                         />
                 </div>
             </div>
         </div>
 
-    {/* First section 1 input in one line */}
-        <div>
+        <div className='w-1/2'>
             <div class="mb-2">
-                <label class="text-sm font-medium text-gray-900 dark:text-gray-500"
-                    data-testid="flowbite-label" for="password">Password</label>
+                <label class="text-sm font-medium text-gray-900 dark:text-gray-600"
+                    for="email">Confirm Password</label>
             </div>
             <div class="flex w-full rounded-lg pt-1">
-                <div class="relative w-full"><input
-                        class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500     p-2.5 text-sm rounded-lg"
-                        id="password" type="password" placeholder='Enter your password' name="password" required="" />
+                <div class="relative w-full">
+                    <input
+                        class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500   p-2.5 text-sm rounded-lg"
+                        id="password2" type="text" name="password2" placeholder="Confirm your password"
+                        />
                 </div>
             </div>
-            <p class="mt-2 cursor-pointer text-blue-500 hover:text-blue-600">Forgot password?</p>
+        </div>
+
         </div>
 
         <div class="flex flex-col gap-2">
@@ -124,10 +122,10 @@ const MentorSignupForm = () => {
                 class="border transition-colors focus:ring-2 p-0.5 disabled:cursor-not-allowed border-transparent bg-[#7F5DF6] hover:bg-[#694cd2] active:bg-sky-800 text-white  rounded-lg ">
                 <span
                     class="flex items-center justify-center gap-1 font-medium py-1 px-2.5 text-base false">
-                    Login
+                    Create Account
                 </span>
             </button>
-
+{/* 
             <button type="button"
                 class="transition-colors focus:ring-2 p-0.5 disabled:cursor-not-allowed bg-white  text-gray-900 border border-gray-200 disabled:bg-gray-300 disabled:text-gray-700 rounded-lg ">
                 <span
@@ -150,7 +148,7 @@ const MentorSignupForm = () => {
                     </svg>
                     Sign in with Google
                 </span>
-            </button>
+            </button> */}
 
         </div>
     </form>

@@ -6,7 +6,7 @@ import HomeBanner from '../../components/home/homeBanner/HomeBanner'
 
 const HomePage = () => {
   return (
-    <main className="bg-white relative  h-screen">
+    <main className="bg-white relative h-auto">
 
       <HomeHeader />
 

@@ -1,11 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const UserButtons = () => {
+  const navigate = useNavigate()
   return (
     <div className="pb-10 overflow-hidden md:p-10 lg:p-0 sm:pb-0">
         <div className='flex justify-center items-center gap-2'>
 
-            <button type="submit" class="px-5 py-3 text-lg tracking-wider text-white bg-blue-500 rounded-lg md:px-8 hover:bg-blue-600 group">
+            <button onClick={()=>navigate('/mentor-signup')} type="submit" class="px-5 py-3 text-lg tracking-wider text-white bg-blue-500 rounded-lg md:px-8 hover:bg-blue-600 group">
                 Join as a Mentor</button>
             <button type="submit" class="px-5 py-3 text-lg tracking-wider text-white bg-blue-500 rounded-lg md:px-8 hover:bg-blue-600 group">
                 Join as a Student</button>

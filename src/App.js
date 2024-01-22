@@ -15,6 +15,7 @@ import AdminHome from './pages/admin/AdminHome';
 import AdminProfile from './pages/admin/adminProfile/AdminProfile';
 import { AdminProfileProvider } from './context/admin/AdminProfileContext';
 import MentorSignUp from './pages/authentication/mentor/MentorSignUp';
+import { MentorAuthProvider } from './context/mentor/authentication/MentorAuthentication';
 
 function App() {
   return (
@@ -23,21 +24,27 @@ function App() {
 
         <AuthProvider>
           <AdminProfileProvider>
-            <Routes>
-              <Route Component={HomePage} path='/' exact />
-              <Route Component={MentorSignUp} path='/mentor-signup' exact />
 
-              <Route Component={AdminPrivateRoute} path='/adminlogin' />
-              <Route Component={AdminPanelRoute} path='/adminpanel'>
-                <Route Component={AdminHome} path='adminHome' />
-                <Route Component={AdminProfile} path='adminProfile' />
-                <Route Component={Departments} path='department'>
-                  <Route Component={Students} path='students' />
-                  <Route Component={Teachers} path='teachers' />
+            <MentorAuthProvider>
+              
+              <Routes>
+                <Route Component={HomePage} path='/' exact />
+                <Route Component={MentorSignUp} path='/mentor-signup' exact />
+
+                <Route Component={AdminPrivateRoute} path='/adminlogin' />
+                <Route Component={AdminPanelRoute} path='/adminpanel'>
+                  <Route Component={AdminHome} path='adminHome' />
+                  <Route Component={AdminProfile} path='adminProfile' />
+                  <Route Component={Departments} path='department'>
+                    <Route Component={Students} path='students' />
+                    <Route Component={Teachers} path='teachers' />
+                  </Route>
                 </Route>
-              </Route>
-                
-            </Routes>
+                  
+              </Routes>
+
+            </MentorAuthProvider>
+
           </AdminProfileProvider>
         </AuthProvider>
         
