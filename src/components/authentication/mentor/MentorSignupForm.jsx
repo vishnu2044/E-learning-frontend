@@ -1,8 +1,30 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import MentorAuthcontext from '../../../context/mentor/authentication/MentorAuthentication'
+import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
 
 const MentorSignupForm = () => {
+    let [pass1Visible, setPass1Visible] = useState("hide")
+    let [pass2Visible, setPass2Visible] = useState("hide")
+
+    const pass1VisibleChange = () =>{
+        if (pass1Visible == "hide"){
+            setPass1Visible('show')
+        }else{
+            setPass1Visible("hide")
+        }
+    }
+
+    const pass2VisibleChange = () =>{
+        if (pass2Visible == "hide"){
+            setPass2Visible('show')
+        }else{
+            setPass2Visible("hide")
+        }
+    }
+
+    let {sigupMentor} = useContext(MentorAuthcontext)
   return (
-    <form  class="flex flex-col  gap-4 pb-2 w-full" >
+    <form  class="flex flex-col  gap-4 pb-2 w-full" onSubmit={sigupMentor}>
         <h1 class="mb-4 text-2xl font-bold text-center">Mentor Sign Up</h1>
 
     {/* First section 1 input in one line username section */}
@@ -92,10 +114,14 @@ const MentorSignupForm = () => {
             </div>
             <div class="flex w-full rounded-lg pt-1">
                 <div class="relative w-full">
-                    <input
-                        class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500   p-2.5 text-sm rounded-lg"
-                        id="passwrod1" type="password" name="passwrod1" placeholder="Enter your passwrod"
-                        />
+                    <div className='justify-between flex w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500   p-2.5 text-sm rounded-lg'>
+                        <input
+                            className='border-none focus:outline-none'
+                            id="password1" type={pass1Visible === 'show' ? "text" : "password" } name="password1" placeholder="Enter password"
+                            />
+
+                        <p onClick={pass1VisibleChange} className='cursor-pointer mt-1'>{pass1Visible === 'show' ? <PiEyeBold /> : <PiEyeClosedBold />}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,10 +133,14 @@ const MentorSignupForm = () => {
             </div>
             <div class="flex w-full rounded-lg pt-1">
                 <div class="relative w-full">
-                    <input
-                        class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500   p-2.5 text-sm rounded-lg"
-                        id="password2" type="text" name="password2" placeholder="Confirm your password"
-                        />
+                    <div className='justify-between flex w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500   p-2.5 text-sm rounded-lg'>
+                        <input
+                            className='border-none focus:outline-none'
+                            id="password2" type={pass2Visible === 'show' ? "text" : "password" } name="password2" placeholder="Confirm password"
+                            />
+
+                            <p onClick={pass2VisibleChange} className='cursor-pointer mt-1'>{pass2Visible === 'show' ? <PiEyeBold /> : <PiEyeClosedBold />}</p>
+                    </div>
                 </div>
             </div>
         </div>

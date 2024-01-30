@@ -16,6 +16,8 @@ import AdminProfile from './pages/admin/adminProfile/AdminProfile';
 import { AdminProfileProvider } from './context/admin/AdminProfileContext';
 import MentorSignUp from './pages/authentication/mentor/MentorSignUp';
 import { MentorAuthProvider } from './context/mentor/authentication/MentorAuthentication';
+import MentorLogin from './pages/authentication/mentor/MentorLogin';
+import MentorPanel from './pages/MentorPanel/MentorPanel';
 
 function App() {
   return (
@@ -29,7 +31,11 @@ function App() {
               
               <Routes>
                 <Route Component={HomePage} path='/' exact />
-                <Route Component={MentorSignUp} path='/mentor-signup' exact />
+
+                <Route Component={MentorSignUp} path='/mentor-signup'  />
+                <Route Component={MentorLogin} path='/mentor-login' />
+                <Route Component={MentorPanel} path='/mentor-panel' />
+                
 
                 <Route Component={AdminPrivateRoute} path='/adminlogin' />
                 <Route Component={AdminPanelRoute} path='/adminpanel'>

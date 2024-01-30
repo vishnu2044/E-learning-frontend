@@ -52,6 +52,34 @@ export const AuthProvider = ({children}) =>{
         }
     }
 
+    let handleMentorLogin = async(e) =>{
+        e.preventDefault()
+        if (isInputEmptyOrSpaces(e.target.username)){
+            ErrorMessage({message: "Please enter username"})
+        }else if (isInputEmptyOrSpaces(e.target.username)){
+            ErrorMessage({message: "Please enter password"})
+        }else{
+            const response = await fetch(`${baseUrl}/mentor-profile//mentor_login`,{
+                headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ 
+                    'username':e.target.username.value, 
+                    'password':e.target.password.value 
+                    }),
+            });
+            if (response.status === 200){
+                let data = await response.json();
+                setUser(jwtDecode(data.access))
+                localStorage.setItem("authTokens", JSON.stringify(data))
+                navigate('/')
+            }else if(response.status === 400) {
+                ErrorMessage({message: "Invalid credentials"})
+            }
+        }
+
+    }
+
     let updateToken = async  () =>{
         console.log('update token called!!!!');
         let response = await fetch(`${baseUrl}/api/token/refresh/`, {
@@ -101,6 +129,8 @@ export const AuthProvider = ({children}) =>{
 
         handleAdminLogin:handleAdminLogin,
         handleAdminLogout:handleAdminLogout,
+
+        handleMentorLogin: handleMentorLogin,
     
     }
     return(

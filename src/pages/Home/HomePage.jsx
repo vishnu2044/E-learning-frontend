@@ -5,10 +5,11 @@ import HomeBanner from '../../components/home/homeBanner/HomeBanner'
 
 
 const HomePage = () => {
+  
   return (
-    <main className="bg-white relative h-auto">
+    <main className="bg-white relative h-auto flex-row">
 
-      <HomeHeader />
+      <HomeHeader/>
 
       <HomeBanner />
 

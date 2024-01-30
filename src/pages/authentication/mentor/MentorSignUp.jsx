@@ -1,5 +1,6 @@
 import React from 'react'
-import MentorSignupForm from '../../../components/authentication/mentor/MentorSignupForm'
+import MentorSignupForm from '../../../components/authentication/mentor/MentorSignupForm';
+import { Link } from 'react-router-dom';
 
 const MentorSignUp = () => {
   return (
@@ -11,9 +12,9 @@ const MentorSignUp = () => {
                 <div class="left-0 right-0 inline-block border-gray-200 px-2 py-1 sm:px-4 w-full">
                     <MentorSignupForm />
                     <div class="min-w-[270px]">
-                        <div class="mt-2 text-center">New user?
-                            <a class="text-blue-500 px-2 hover:text-blue-600" href="/signup">Create account
-                                here</a>
+                        <div class="mt-2 text-center">Already have an account ?
+                            <Link to='/mentor-login' class="text-blue-500 px-2 hover:text-blue-600">Login
+                                here</Link>
                         </div>
                     </div>
                 </div>
