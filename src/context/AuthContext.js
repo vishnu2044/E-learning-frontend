@@ -16,6 +16,7 @@ export const AuthProvider = ({children}) =>{
     
     let [authToken, setAuthToken] = useState(()=> localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('authToken')) : null)
     let [user, setUser] = useState(()=> localStorage.getItem('authToken') ? jwtDecode(localStorage.getItem('authToken')) : null)
+
     const navigate = useNavigate()
     let [loading, setLoading] = useState(true)
 
@@ -54,25 +55,28 @@ export const AuthProvider = ({children}) =>{
 
     let handleMentorLogin = async(e) =>{
         e.preventDefault()
+        console.log(e.target.username.value);
+        console.log(e.target.password.value);
         if (isInputEmptyOrSpaces(e.target.username)){
             ErrorMessage({message: "Please enter username"})
-        }else if (isInputEmptyOrSpaces(e.target.username)){
+        }else if (isInputEmptyOrSpaces(e.target.password)){
             ErrorMessage({message: "Please enter password"})
         }else{
-            const response = await fetch(`${baseUrl}/mentor-profile//mentor_login`,{
+            let response = await fetch(`${baseUrl}/mentor-profile/mentor-login/`,{
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({ 
-                    'username':e.target.username.value, 
-                    'password':e.target.password.value 
-                    }),
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                  'username':e.target.username.value, 
+                  'password':e.target.password.value 
+                  }),
             });
             if (response.status === 200){
                 let data = await response.json();
                 setUser(jwtDecode(data.access))
-                localStorage.setItem("authTokens", JSON.stringify(data))
-                navigate('/')
+                localStorage.setItem("authToken", JSON.stringify(data))
+                navigate('/mentor-panel')
             }else if(response.status === 400) {
                 ErrorMessage({message: "Invalid credentials"})
             }
@@ -102,33 +106,41 @@ export const AuthProvider = ({children}) =>{
           }
     }
 
+
+
+    
     let handleAdminLogout =  () =>{
         setAuthToken(null)
         setUser(null)
         localStorage.removeItem('authToken')
         navigate('adminlogin')
-
     }
-
+    
+    
     useEffect(()=>{
-
+        
         let  fourMinutes = 1000 * 60 * 4
         let interval =  setInterval(() => {
-           if(authToken) {
+            if(authToken) {
             updateToken()
-           }
+            
+            }
         }, fourMinutes);
         return ()=> clearInterval(interval)
 
-    }, [authToken, loading])
     
+    }, [authToken, loading])
+
+
 
     let contextData = {
         user:user,
         authToken:authToken,
 
+
         handleAdminLogin:handleAdminLogin,
         handleAdminLogout:handleAdminLogout,
+        
 
         handleMentorLogin: handleMentorLogin,
     

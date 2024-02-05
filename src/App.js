@@ -18,6 +18,9 @@ import MentorSignUp from './pages/authentication/mentor/MentorSignUp';
 import { MentorAuthProvider } from './context/mentor/authentication/MentorAuthentication';
 import MentorLogin from './pages/authentication/mentor/MentorLogin';
 import MentorPanel from './pages/MentorPanel/MentorPanel';
+import MentorPanelPrivateRoute from './utilities/MentorPanelPrivateRout';
+import MentorProfile from './pages/MentorPanel/MentorProfile';
+import MentorDashBoard from './pages/MentorPanel/MentorDashBoard';
 
 function App() {
   return (
@@ -33,11 +36,19 @@ function App() {
                 <Route Component={HomePage} path='/' exact />
 
                 <Route Component={MentorSignUp} path='/mentor-signup'  />
-                <Route Component={MentorLogin} path='/mentor-login' />
-                <Route Component={MentorPanel} path='/mentor-panel' />
                 
+      
+                <Route Component={MentorLogin} path='/mentor-login' />
 
-                <Route Component={AdminPrivateRoute} path='/adminlogin' />
+                <Route Component={MentorPanelPrivateRoute} path='/mentor-panel'>
+                  <Route Component={MentorProfile} path='mentor-profile' />
+                  <Route Component={MentorDashBoard} path='mentor-dashboard' />
+
+                </Route>
+
+                
+                <Route Component={AdminPanelRoute} path='/adminlogin' />
+
                 <Route Component={AdminPanelRoute} path='/adminpanel'>
                   <Route Component={AdminHome} path='adminHome' />
                   <Route Component={AdminProfile} path='adminProfile' />

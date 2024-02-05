@@ -1,8 +1,11 @@
 import React from 'react'
+import MentorProfileCard from '../../components/mentor/profile/MentorProfileCard'
 
 const MentorProfile = () => {
   return (
-    <div>MentorProfile</div>
+    <>
+      <MentorProfileCard />
+    </>
   )
 }
 

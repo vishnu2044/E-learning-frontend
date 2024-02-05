@@ -13,7 +13,7 @@ export const AdminProfileProvider = ({children}) =>{
 
     
     const getAdminProfilePic = async() =>{
-        console.log(user?.username);
+        console.log(user);
         try{
             let response = await fetch( `${baseUrl}/admin-profile/get-admin-profile-pic/`, {
                 method: 'GET',

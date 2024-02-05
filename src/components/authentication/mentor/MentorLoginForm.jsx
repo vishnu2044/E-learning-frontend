@@ -46,7 +46,7 @@ const MentorLoginForm = () => {
                     <div className='justify-between flex w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500   p-2.5 text-sm rounded-lg'>
                         <input
                             className='border-none focus:outline-none'
-                            id="password2"  name="password2" placeholder="Enter your password"
+                            id="password" type='password' name="password" placeholder="Enter your password"
                             />
 
                             <p  className='cursor-pointer mt-1'></p>
@@ -62,7 +62,7 @@ const MentorLoginForm = () => {
                 class="border transition-colors  focus:ring-2 p-0.5  disabled:cursor-not-allowed border-transparent bg-[#7F5DF6] hover:bg-[#694cd2] active:bg-sky-800 text-white  rounded-lg ">
                 <span
                     class="flex items-center justify-center gap-1 font-medium py-1 px-2.5 text-base false">
-                    Create Account
+                    Login
                 </span>
             </button>
 

@@ -6,7 +6,7 @@ import AuthContext from "../context/AuthContext";
 
 const AdminPrivateRoute = ({children, ...rest}) => {
     let {user} = useContext(AuthContext)
-    return ! user ? <AdminLogin />  : <AdminPanel />  
+    return  ! user ? <AdminLogin />  : <AdminPanel />  
 }
 
 export default AdminPrivateRoute;
