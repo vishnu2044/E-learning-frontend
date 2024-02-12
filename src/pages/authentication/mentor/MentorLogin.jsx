@@ -1,5 +1,6 @@
 import React from 'react'
 import MentorLoginForm from '../../../components/authentication/mentor/MentorLoginForm'
+import { Link } from 'react-router-dom'
 
 const MentorLogin = () => {
   return (
@@ -13,8 +14,8 @@ const MentorLogin = () => {
                         <MentorLoginForm />
                         <div class="min-w-[270px]">
                             <div class="mt-2 text-center">New user?
-                                <a class="text-blue-500 px-2 hover:text-blue-600" href="/signup">Create account
-                                    here</a>
+                                <Link to='/mentor-signup' class="text-blue-500 px-2 hover:text-blue-600" >Create account
+                                    here</Link>
                             </div>
                         </div>
                     </div>

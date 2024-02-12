@@ -14,9 +14,9 @@ const Header = () => {
             <div class="hidden md:flex md:items-center md:justify-center md:gap-5">
                 <Link to='adminHome' class="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
                     href="#">Home</Link>
-                <Link to='department' aria-current="page"
+                <Link to='site-management/management-nav' aria-current="page"
                     class="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-                    href="#">Departments</Link>
+                    href="#">Site Management</Link>
                 <Link to='department/teachers' class="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
                     href="#">Teachers</Link>
                 <Link to='department/students' aria-current="page"

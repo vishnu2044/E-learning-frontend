@@ -21,6 +21,9 @@ import MentorPanel from './pages/MentorPanel/MentorPanel';
 import MentorPanelPrivateRoute from './utilities/MentorPanelPrivateRout';
 import MentorProfile from './pages/MentorPanel/MentorProfile';
 import MentorDashBoard from './pages/MentorPanel/MentorDashBoard';
+import EditMentorProfile from './pages/MentorPanel/EditMentorProfile';
+import SiteManagement from './pages/admin/siteMangement/SiteManagement';
+import ManagemenetComponents from './components/admin/siteManagement/ManagemenetComponents';
 
 function App() {
   return (
@@ -43,19 +46,28 @@ function App() {
                 <Route Component={MentorPanelPrivateRoute} path='/mentor-panel'>
                   <Route Component={MentorProfile} path='mentor-profile' />
                   <Route Component={MentorDashBoard} path='mentor-dashboard' />
+                  <Route Component={EditMentorProfile} path='edit-mentor-profile' />
+
 
                 </Route>
 
                 
-                <Route Component={AdminPanelRoute} path='/adminlogin' />
+                <Route Component={AdminLogin} path='/adminlogin' />
 
                 <Route Component={AdminPanelRoute} path='/adminpanel'>
                   <Route Component={AdminHome} path='adminHome' />
                   <Route Component={AdminProfile} path='adminProfile' />
-                  <Route Component={Departments} path='department'>
+                  
+                  <Route Component={SiteManagement} path='site-management'>
+                    <Route Component={ManagemenetComponents} path='management-nav' />
+
+                    <Route Component={Departments} path='department' />
                     <Route Component={Students} path='students' />
                     <Route Component={Teachers} path='teachers' />
+
                   </Route>
+                  
+
                 </Route>
                   
               </Routes>

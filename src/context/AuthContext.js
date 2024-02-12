@@ -45,7 +45,7 @@ export const AuthProvider = ({children}) =>{
                 setAuthToken(data)
                 setUser(jwtDecode(data.access))
                 localStorage.setItem('authToken', JSON.stringify(data))
-                navigate('adminpanel')
+                navigate('adminpanel/adminHome')
             } else if (response.status === 401) {
                 ErrorMessage({message: "Invalid credentials"})
             }

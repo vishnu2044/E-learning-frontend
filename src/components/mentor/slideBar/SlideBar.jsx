@@ -5,23 +5,25 @@ import { IoHomeSharp } from "react-icons/io5";
 import { FaUserAlt } from "react-icons/fa";
 import { MdOutlineCastForEducation } from "react-icons/md";
 import { HiUserGroup } from "react-icons/hi";
+import { useNavigate } from 'react-router-dom';
 
 const SlideBar = () => {
     const [open, setOpen] = useState(true)
     let {user} = useContext(AuthContext)
+    const navigate = useNavigate()
   return (
     <div className={`${open ? 'sm:w-56 w-20' : 'w-20'} p-5 pt-8 duration-300 h-screen bg-blue-200 relative rounded-sm `}>
       <img src={image} onClick={()=> setOpen(!open)} className={`relative cursor-pointer duration-500 rounded-full border border-blue-200 shadow-lg ${open ? 'w-2/6' : 'w-6/7'} `} />
       
-        <div className={`flex items-center bg-gray-100 cursor-pointer shadow-md mt-4 rounded-lg ${open && 'h-14  mb-8' }  px-3`}>
+        <div onClick={()=> navigate("mentor-profile")} className={`flex items-center bg-gray-100 cursor-pointer shadow-md mt-4 rounded-lg ${open && 'h-14  mb-8' }  px-3`}>
           <span className={`cursor-pointer duration-300  shadow-lg`} > <FaUserAlt className='text-gray-600' /> </span>
           <h1 className={`text-gray-500 origin-left mx-2 font-medium hidden sm:block text-xl duration-300 ${!open && 'scale-0'}`}>{user.username}</h1>
         </div>
 
-      <div className= {`pt-4 duration-300 h-1/2 relativ`}>
+      <div className= {` duration-300 h-1/2 relativ`}>
 
         
-        <div className='flex gap-x-4 items-center bg-gray-100 cursor-pointer shadow-md mt-2 rounded-lg  p-1 px-3'>
+        <div className='flex gap-x-4 items-center bg-gray-100 cursor-pointer shadow-md mt-2 rounded-lg  p-1 px-3' onClick={()=> navigate("mentor-dashboard")} >
           <span className={`cursor-pointer duration-300  shadow-lg  `} > <IoHomeSharp className='text-gray-600' /> </span>
           <h1 className={`text-gray-500 origin-left font-medium hidden sm:block text-xl duration-300 ${!open && 'scale-0'}`}>Home</h1>
         </div>
