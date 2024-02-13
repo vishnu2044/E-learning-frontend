@@ -3,7 +3,7 @@ import ProfilePicture from './ProfilePicture'
 import Authcontext from '../../../context/AuthContext'
 
 const MentorProfileCard = () => {
-    let {user} = useContext(Authcontext)
+    let {user, } = useContext(Authcontext)
   return (
     <>
     <div

@@ -115,6 +115,12 @@ export const AuthProvider = ({children}) =>{
         localStorage.removeItem('authToken')
         navigate('adminlogin')
     }
+    let handleMentorLogout = () =>{
+        setAuthToken(null)
+        setUser(null)
+        localStorage.removeItem("authToken")
+        navigate('/')
+    }
     
     
     useEffect(()=>{
@@ -143,6 +149,7 @@ export const AuthProvider = ({children}) =>{
         
 
         handleMentorLogin: handleMentorLogin,
+        handleMentorLogout:handleMentorLogout,
     
     }
     return(

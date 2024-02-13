@@ -24,6 +24,7 @@ import MentorDashBoard from './pages/MentorPanel/MentorDashBoard';
 import EditMentorProfile from './pages/MentorPanel/EditMentorProfile';
 import SiteManagement from './pages/admin/siteMangement/SiteManagement';
 import ManagemenetComponents from './components/admin/siteManagement/ManagemenetComponents';
+import { CommonDetailsProvider } from './context/common/CommonDetails';
 
 function App() {
   return (
@@ -31,50 +32,49 @@ function App() {
       <Router>
 
         <AuthProvider>
-          <AdminProfileProvider>
-
-            <MentorAuthProvider>
-              
-              <Routes>
-                <Route Component={HomePage} path='/' exact />
-
-                <Route Component={MentorSignUp} path='/mentor-signup'  />
+          <CommonDetailsProvider>
+            <AdminProfileProvider>
+              <MentorAuthProvider>
                 
-      
-                <Route Component={MentorLogin} path='/mentor-login' />
+                <Routes>
+                  <Route Component={HomePage} path='/' exact />
 
-                <Route Component={MentorPanelPrivateRoute} path='/mentor-panel'>
-                  <Route Component={MentorProfile} path='mentor-profile' />
-                  <Route Component={MentorDashBoard} path='mentor-dashboard' />
-                  <Route Component={EditMentorProfile} path='edit-mentor-profile' />
-
-
-                </Route>
-
-                
-                <Route Component={AdminLogin} path='/adminlogin' />
-
-                <Route Component={AdminPanelRoute} path='/adminpanel'>
-                  <Route Component={AdminHome} path='adminHome' />
-                  <Route Component={AdminProfile} path='adminProfile' />
+                  <Route Component={MentorSignUp} path='/mentor-signup'  />
                   
-                  <Route Component={SiteManagement} path='site-management'>
-                    <Route Component={ManagemenetComponents} path='management-nav' />
+        
+                  <Route Component={MentorLogin} path='/mentor-login' />
 
-                    <Route Component={Departments} path='department' />
-                    <Route Component={Students} path='students' />
-                    <Route Component={Teachers} path='teachers' />
+                  <Route Component={MentorPanelPrivateRoute} path='/mentor-panel'>
+                    <Route Component={MentorProfile} path='mentor-profile' />
+                    <Route Component={MentorDashBoard} path='mentor-dashboard' />
+                    <Route Component={EditMentorProfile} path='edit-mentor-profile' />
+
 
                   </Route>
+
                   
+                  <Route Component={AdminLogin} path='/adminlogin' />
 
-                </Route>
-                  
-              </Routes>
+                  <Route Component={AdminPanelRoute} path='/adminpanel'>
+                    <Route Component={AdminHome} path='adminHome' />
+                    <Route Component={AdminProfile} path='adminProfile' />
+                    
+                    <Route Component={SiteManagement} path='site-management'>
+                      <Route Component={ManagemenetComponents} path='management-nav' />
 
-            </MentorAuthProvider>
+                      <Route Component={Departments} path='department' />
+                      <Route Component={Students} path='students' />
+                      <Route Component={Teachers} path='teachers' />
 
-          </AdminProfileProvider>
+                    </Route>
+
+                  </Route>
+                    
+                </Routes>
+
+              </MentorAuthProvider>
+            </AdminProfileProvider>
+          </CommonDetailsProvider>
         </AuthProvider>
         
       </Router>

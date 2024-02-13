@@ -3,7 +3,7 @@ import AuthContext from '../../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 const ProfilePicture = () => {
-  let {user} = useContext(AuthContext)
+  let {user, handleMentorLogout} = useContext(AuthContext)
   const navigate = useNavigate()
   return (
     <div>
@@ -22,8 +22,10 @@ const ProfilePicture = () => {
               <h2 class="font-semibold">{user ? user.username : "username"}</h2>
               <p class="text-gray-500">Freelance Web Designer</p>
             </div>
-            <div className='h-auto align-center p-3 px-6'>
-              <p onClick={()=> navigate("/mentor-panel/edit-mentor-profile")} className='p-2 bg-gray-50 cursor-pointer border border-gray-200 shadow-sm rounded-md'>Edit Profile</p>
+            <div className='h-auto align-center p-3 px-6 flex'>
+              <p onClick={()=> navigate("/mentor-panel/edit-mentor-profile")} className='p-2 mx-2 bg-gray-50 cursor-pointer border border-gray-200 shadow-sm rounded-md'>Edit Profile</p>
+              <p onClick={()=>handleMentorLogout()} className='p-2 mx-2 bg-gray-50 cursor-pointer border border-gray-200 shadow-sm rounded-md'>Logout</p>
+              
             </div>
 
           </div>
