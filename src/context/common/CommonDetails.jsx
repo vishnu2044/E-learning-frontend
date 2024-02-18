@@ -25,13 +25,13 @@ export const CommonDetailsProvider = ({children}) =>{
     
             });
             if (response.status === 200){
-                let data = response.json()
+                let data = await response.json()
+                console.log("profession dasta ", data)
                 setProfessions(data)
-                SuccessMessage({message: "data get successfully"})
             }else if (response.status === 404){
                 ErrorMessage({message: 'data not found'})
             }else{
-                ErrorMessage({message: "some error from the backend"})
+                console.log("error from backend", response.status);
             }
         }else{
             ErrorMessage({message: "user is not authenticated"})
@@ -52,27 +52,24 @@ export const CommonDetailsProvider = ({children}) =>{
             if (response.status === 200){
                 let data = await response.json()
                 setEducationList(data)
-                SuccessMessage({message: "education  data get successfully"})
             }else if (response.status === 404){
                 ErrorMessage({message: 'data not found'})
             }else{
-                ErrorMessage({message: "some error from the backend"})
+                console.log("error from backend", response.status);
             }
         }else{
             ErrorMessage({message: "user is not authenticated"})
         }
     }
 
-    useEffect(()=>{
-        if(authToken){
-            getProfessionList()
-            getEducationList()
-        }
-    }, [authToken, ])
+
 
     let CommonDetailsContextData = {
         professions:professions,
-        educationList:educationList
+        educationList:educationList,
+
+        getProfessionList:getProfessionList,
+        getEducationList:getEducationList
 
     }
     return(

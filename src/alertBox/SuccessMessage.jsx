@@ -13,6 +13,7 @@ const Toast = Swal.mixin({
   });
 
 export const SuccessMessage = ({message}) =>  Toast.fire({
+  
     icon: "success",
     title: message
   });

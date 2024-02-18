@@ -1,19 +1,10 @@
 import React from 'react'
+import ProfileImageDisplay from './profileImageEditor/ProfileImageDisplay'
 
 const EditProfileComponent = () => {
   return (
   <div className='sm:max-w-6xl p-3 max-w-5xl mx-auto mt-16 sm:mt-6 bg-white shadow-xl rounded-lg text-gray-900'>
-    <div className='sm:flex justify-between m-6'>
-      <div className='max-w-80 max-h-80 text-center rounded-md mb-4 sm:mr-6'>
-        <img className='rounded-2xl shadow-sm' src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ" alt="" />
-        <p className='p-2 cursor-pointer mx-12 m-2 shadow-md rounded-md border border-gray-200 bg-gray-50 '>Change profile photo</p>
-      </div>
-
-      <div className='max-w-80 max-h-80 text-center rounded-md mb-4 sm:ml-6'>
-        <img className='rounded-2xl shadow-sm' src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ" alt="" />
-        <p className='p-2 cursor-pointer mx-12 m-2 shadow-md rounded-md border border-gray-200 bg-gray-50 '>Change cover photo</p>
-      </div>
-    </div>
+    <ProfileImageDisplay />
     <p className="text-left px-4 text-xl font-semibold mb-4">Edit your profile</p>
     <form action="" className="px-4">
 

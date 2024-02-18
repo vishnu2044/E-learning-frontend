@@ -7,6 +7,7 @@ import StudentPage from './components/admin/students/StudentPage';
 import AdminPrivateRoute from '../src/utilities/PrivateRoute';
 import AdminPanelRoute from '../src/utilities/AdminPanelPrivateRoute';
 
+
 import { AuthProvider } from './context/AuthContext';
 import Teachers from './pages/admin/Teachers';
 import Students from './pages/admin/Students';
