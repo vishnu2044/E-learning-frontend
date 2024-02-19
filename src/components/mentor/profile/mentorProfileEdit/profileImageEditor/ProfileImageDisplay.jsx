@@ -10,7 +10,9 @@ const ProfileImageDisplay = () => {
         <p onClick={()=> setProfileImageCropTab(true)} className='p-2 cursor-pointer mx-12 m-2 shadow-md rounded-md border border-gray-200 bg-gray-50 '>Change profile photo</p>
       </div>
       {
-        profileImageCropTab && <ProfileImageModel setProfileImageCropTab = {setProfileImageCropTab} />
+        profileImageCropTab && <ProfileImageModel 
+                                  setProfileImageCropTab = {setProfileImageCropTab}                       
+                                />
       }
         
       <div className='max-w-80 max-h-80 text-center rounded-md mb-4 sm:ml-6'>
