@@ -16,6 +16,7 @@ export const AuthProvider = ({children}) =>{
     
     let [authToken, setAuthToken] = useState(()=> localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('authToken')) : null)
     let [user, setUser] = useState(()=> localStorage.getItem('authToken') ? jwtDecode(localStorage.getItem('authToken')) : null)
+    
 
     const navigate = useNavigate()
     let [loading, setLoading] = useState(true)
@@ -76,9 +77,11 @@ export const AuthProvider = ({children}) =>{
                 let data = await response.json();
                 setUser(jwtDecode(data.access))
                 localStorage.setItem("authToken", JSON.stringify(data))
-                navigate('/mentor-panel')
+                navigate('/mentor-panel/mentor-dashboard')
             }else if(response.status === 400) {
                 ErrorMessage({message: "Invalid credentials"})
+            }else{
+                console.log("some error found", response.status);
             }
         }
 

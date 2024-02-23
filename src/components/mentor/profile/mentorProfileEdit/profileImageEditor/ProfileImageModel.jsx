@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { IoClose } from "react-icons/io5";
 import ProfileImageSelector from './ProfileImageSelector';
 import ProfileImageCroper from './ProfileImageCroper';
+import {baseUrl} from '../../../../../configure/urls';
+import AuthContext from '../../../../../context/AuthContext';
 
 
 const ProfileImageModel = ({
@@ -10,6 +12,10 @@ const ProfileImageModel = ({
     const [image, setImage] = useState('');
     const [currentpage, setCurrentPage] = useState('choose-img')
     const [imgAfterCrop, setImgAfterCrop] = useState('')
+    const [imgcorpDone, setImgCropDone] = useState(false)
+
+
+    let {authToken, user} = useContext(AuthContext)
 
     const onImageSelected = (selectedImage) =>{
       setImage(selectedImage)
@@ -40,9 +46,62 @@ const ProfileImageModel = ({
     
         const dataURL = canvasEle.toDataURL("image/jpeg");
         setImgAfterCrop(dataURL);
-        setProfileImageCropTab(false)
+        setCurrentPage('choose-img')
+        setImgCropDone(true)
+        
         };
       };
+
+      const profileImgUpload = async () => {
+        if (!imgAfterCrop) {
+            console.log("Image not found");
+            alert("Image not found");
+            return;
+        }
+        if (!authToken) {
+            alert("Auth token is not found");
+            return;
+        }
+    
+        // Convert base64 string to Blob
+        const base64Data = imgAfterCrop.split(',')[1];
+        const blob = await fetch(`data:image/jpeg;base64,${base64Data}`).then(response => response.blob());
+    
+        // Create FormData and append the Blob
+        const formData = new FormData();
+        formData.append("profile_img", blob);
+    
+        // Send the request
+        try {
+            const response = await fetch(`${baseUrl}/user-profile/upload-profile-image/`, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Authorization': 'Bearer ' + authToken.access,
+                }
+            });
+            const data = await response.json();
+            if (response.ok) {
+                alert("Image uploaded successfully");
+                setImgCropDone(false);
+            } else {
+                alert("Error uploading image. Please check the console.");
+                console.log("Error:", response.status, data);
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
+            alert("An error occurred while uploading the image.");
+        }
+    };
+    
+
+    useEffect(()=>{
+        if (imgcorpDone){
+            profileImgUpload()
+        }
+
+    }, [imgcorpDone])
+    
 
     const onCropCancel = () => {
         setCurrentPage("choose-img");
@@ -71,6 +130,9 @@ const ProfileImageModel = ({
                             currentpage === 'choose-img' ? <ProfileImageSelector className='p-4' onImageSelected={onImageSelected} />
                             : <div></div>
                         } 
+                        {
+                            imgAfterCrop ? <img src={imgAfterCrop} alt="" /> : <p>No image croped</p>
+                        }
 
                     </div>
 

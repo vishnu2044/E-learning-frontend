@@ -9,7 +9,6 @@ const ProfileImageSelector = ({ onImageSelected }) => {
         const reader = new FileReader();
     
         reader.onload = (e) => { // Move console.log inside onload
-          console.log(e.target.result); // Access image data here
           onImageSelected(e.target.result); // Pass the image data
         };
     
