@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import AuthContext from '../../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import UserImageContext from '../../../context/common/UserImages'
+import { baseUrl } from '../../../configure/urls'
 
 const ProfilePicture = () => {
   let {user, handleMentorLogout} = useContext(AuthContext)
@@ -19,7 +20,7 @@ const ProfilePicture = () => {
         </div>
         <div class="w-48 h-48 relative border-2 border-white rounded-full shadow-xl overflow-hidden justify-start sm:ml-8 mx-auto max-w-screen-sm sm:-mt-28 -mt-72">
             <img class="object-cover object-center h-48 w-full" 
-                src={profileImg ? profileImg : 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' }  
+                src={profileImg ? `${baseUrl}/${profileImg.profile_img_url}` : 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' }  
                 alt='Woman looking front' /> 
         </div>
 

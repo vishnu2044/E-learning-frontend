@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import AuthContext from "../AuthContext";
 import { baseUrl } from "../../configure/urls";
 import { SuccessMessage } from "../../alertBox/SuccessMessage";
@@ -11,7 +11,7 @@ export const UserImgProvider = ({ children }) => {
     const { authToken, user } = useContext(AuthContext);
     const [profileImg, setProfileImg] = useState(null);
 
-    
+
     const getUserProfileImg = async () => {
         try {
             console.log("user id :::::::", user.username);
@@ -22,10 +22,11 @@ export const UserImgProvider = ({ children }) => {
                 }
             });
             if (response.ok) {
-                const imageUrl = URL.createObjectURL(await response.blob()); // Create object URL for the blob
-                console.log("Image URL:", imageUrl); // Log the image URL
                 SuccessMessage({ message: "Image retrieved successfully!" });
-                setProfileImg(imageUrl); // Set image URL in state
+                const imageData = await response.json();
+                console.log(imageData);
+
+                setProfileImg(imageData);
             } else {
                 ErrorMessage({ message: "An error occurred while trying to retrieve the profile image" });
             }
