@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
-import ProfilePicture from './ProfilePicture'
-import Authcontext from '../../../context/AuthContext'
+import React, { useContext } from 'react';
+import ProfilePicture from './ProfilePicture';
 
 const MentorProfileCard = () => {
-    let {user, } = useContext(Authcontext)
+
   return (
     <>
     <div
@@ -13,7 +12,7 @@ const MentorProfileCard = () => {
 
         <div className='sm:flex mx-2 justify-center gap-3 mb-3'>
             
-            <div class="flex justify-between text-left mt-2 border border-gray-200 shadow-sm rounded-lg cursor-pointer sm:w-1/3 pb-2  m-2 p-3 ">
+            <div class="flex justify-between text-left mt-2 border  border-gray-200 shadow-sm rounded-lg cursor-pointer sm:w-1/3 pb-2  m-2 p-3 ">
                 <h2 class="font-semibold p-2">Blogs</h2>
                 <div className='w-auto h-auto r p-2 text-center text-gray-500 '>1k </div>
             </div>
@@ -25,7 +24,7 @@ const MentorProfileCard = () => {
 
             <div class="flex justify-between text-left mt-2 border border-gray-200 shadow-sm rounded-lg cursor-pointer sm:w-1/3 pb-2  m-2 p-3 ">
                 <h2 class="font-semibold p-2">Courses</h2>
-                <div className='w-auto h-auto r p-2 text-center text-gray-500 '>1k </div>
+                <div className='w-auto h-auto r p-2 text-center   text-gray-500 '>1k </div>
             </div>
 
 

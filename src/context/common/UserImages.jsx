@@ -8,7 +8,7 @@ const UserImageContext = createContext();
 export default UserImageContext;
 
 export const UserImgProvider = ({ children }) => {
-    const { authToken, user } = useContext(AuthContext);
+    const { authToken, user, handleMentorLogout } = useContext(AuthContext);
     const [profileImg, setProfileImg] = useState(null);
 
 
@@ -22,11 +22,14 @@ export const UserImgProvider = ({ children }) => {
                 }
             });
             if (response.ok) {
-                SuccessMessage({ message: "Image retrieved successfully!" });
                 const imageData = await response.json();
                 console.log(imageData);
 
                 setProfileImg(imageData);
+            }else if(response.status === 401){
+                ErrorMessage({message: "Auhthentication fail: Logging out"})
+                handleMentorLogout()
+
             } else {
                 ErrorMessage({ message: "An error occurred while trying to retrieve the profile image" });
             }

@@ -2,8 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { IoClose } from "react-icons/io5";
 import ProfileImageSelector from './ProfileImageSelector';
 import ProfileImageCroper from './ProfileImageCroper';
-import {baseUrl} from '../../../../../configure/urls';
-import AuthContext from '../../../../../context/AuthContext';
+import { baseUrl } from '../../../configure/urls';
+import AuthContext from '../../../context/AuthContext';
+import UserImageContext from '../../../context/common/UserImages';
+import { SuccessMessage } from '../../../alertBox/SuccessMessage';
+import { ErrorMessage } from '../../../alertBox/ErrorMessage';
 
 
 const ProfileImageModel = ({
@@ -13,9 +16,10 @@ const ProfileImageModel = ({
     const [currentpage, setCurrentPage] = useState('choose-img')
     const [imgAfterCrop, setImgAfterCrop] = useState('')
     const [imgcorpDone, setImgCropDone] = useState(false)
+    const { getUserProfileImg} = useContext(UserImageContext)
 
 
-    let {authToken, user} = useContext(AuthContext)
+    let {authToken, handleMentorLogout} = useContext(AuthContext)
 
     const onImageSelected = (selectedImage) =>{
       setImage(selectedImage)
@@ -48,6 +52,7 @@ const ProfileImageModel = ({
         setImgAfterCrop(dataURL);
         setCurrentPage('choose-img')
         setImgCropDone(true)
+
         
         };
       };
@@ -63,15 +68,13 @@ const ProfileImageModel = ({
             return;
         }
     
-        // Convert base64 string to Blob
         const base64Data = imgAfterCrop.split(',')[1];
         const blob = await fetch(`data:image/jpeg;base64,${base64Data}`).then(response => response.blob());
-    
-        // Create FormData and append the Blob
         const formData = new FormData();
+        console.log("blob data:::::", blob);
         formData.append("profile_img", blob);
+
     
-        // Send the request
         try {
             const response = await fetch(`${baseUrl}/user-profile/upload-profile-image/`, {
                 method: 'POST',
@@ -82,10 +85,14 @@ const ProfileImageModel = ({
             });
             const data = await response.json();
             if (response.ok) {
-                alert("Image uploaded successfully");
-                setImgCropDone(false);
+                setProfileImageCropTab(false)
+                getUserProfileImg()
+                SuccessMessage({message: "Profile image updated successfully"})
+            } else if(response.status === 401){
+                ErrorMessage({message: "unauthorized: Loging out"})
+                handleMentorLogout()
+
             } else {
-                alert("Error uploading image. Please check the console.");
                 console.log("Error:", response.status, data);
             }
         } catch (error) {
@@ -130,10 +137,6 @@ const ProfileImageModel = ({
                             currentpage === 'choose-img' ? <ProfileImageSelector className='p-4' onImageSelected={onImageSelected} />
                             : <div></div>
                         } 
-                        {
-                            imgAfterCrop ? <img src={imgAfterCrop} alt="" /> : <p>No image croped</p>
-                        }
-
                     </div>
 
                     

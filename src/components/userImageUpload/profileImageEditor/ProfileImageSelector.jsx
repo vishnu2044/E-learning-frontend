@@ -25,7 +25,7 @@ const ProfileImageSelector = ({ onImageSelected }) => {
 
   return (
     <>
-        <label onClick={onChooseImg} className="block mb-3 w-fit mt-3">
+        <label onClick={onChooseImg} className=" mb-3 mt-3">
             <span className="sr-only">Choose profile photo</span>
             <input
                 type="file"
@@ -33,13 +33,7 @@ const ProfileImageSelector = ({ onImageSelected }) => {
                 ref={inputRef}
                 onChange={handleOnChange}
                 style={{ display: "none" }}
-                className="block w-full text-sm file:cursor-pointer text-slate-500 file:mr-4 file:py-1 file:px-2 
-                    file:rounded-full 
-                    file:border file:border-gray-50
-                    file:text-xs file:shadow-md 
-                    file:text-gray-700 
-                    hover:file:text-white
-                    hover:file:bg-gray-600"
+
             />
         </label>
         <div>

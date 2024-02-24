@@ -1,11 +1,11 @@
-import React from 'react'
-import ProfileImageDisplay from './profileImageEditor/ProfileImageDisplay'
+import React from 'react';
+
 
 const EditProfileComponent = () => {
   return (
   <div className='sm:max-w-6xl p-3 max-w-5xl mx-auto mt-16 sm:mt-6 bg-white shadow-xl rounded-lg text-gray-900'>
-    <ProfileImageDisplay />
     <p className="text-left px-4 text-xl font-semibold mb-4">Edit your profile</p>
+
     <form action="" className="px-4">
 
       <div className='sm:flex justify-between mx-3 font-normal mb-4'>
