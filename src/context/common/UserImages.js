@@ -14,6 +14,10 @@ export const UserImgProvider = ({ children }) => {
 
 
     const getUserProfileImg = async () => {
+        if (!authToken){
+            window.location.reload()
+            ErrorMessage({message: "Authtoken not found"})
+        }
         try {
             console.log("user id :::::::", user.username);
             const response = await fetch(`${baseUrl}/user-profile/get-profile-img/${user.id}/`, {
@@ -31,17 +35,20 @@ export const UserImgProvider = ({ children }) => {
                 ErrorMessage({message: "Auhthentication fail: Logging out"})
                 handleMentorLogout()
 
+            }else if(response.status === 404){
+                console.log("profile image not found");
+
             } else {
                 ErrorMessage({ message: "An error occurred while trying to retrieve the profile image" });
             }
         } catch (error) {
             console.error("An error occurred:", error);
-            ErrorMessage({ message: "Unauthorized: Caught an error" });
+            ErrorMessage({ message: "Unauthorized: Caught an error while profile image get" });
         }
     };
 
     const getCoverImg = async() =>{
-        if (!authToken.access){
+        if (!authToken){
             console.log("access token shows None");
             window.location.reload()
         }
@@ -55,17 +62,20 @@ export const UserImgProvider = ({ children }) => {
             if (response.ok){
                 const imageData = await response.json()
                 setCoverimg(imageData)
-                SuccessMessage({message: "Cover image get successfully"})
             }else if(response.status === 401){
                 ErrorMessage({message: "Auhthentication fail: Logging out"})
                 handleMentorLogout()
+
+            }else if(response.status === 404){
+                console.log("profile image not added");
 
             } else {
                 ErrorMessage({ message: "An error occurred while trying to retrieve the profile image" });
             }
         }catch (error){
-            console.error("An error occurred:", error);
-            ErrorMessage({ message: "Unauthorized: Caught an error" });
+            console.error("An error occurred: while cover image get", error);
+            window.location.reload()
+            
         }
     }
     

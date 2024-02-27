@@ -21,13 +21,13 @@ const HeaderDropDown = () => {
         {/* Dropdown content */}
       <div className='flex p-1'>
         <Link
-          to="/mentor-login"
+          to="mentor//mentor-login"
           className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-100 hover:rounded-lg"
         >
           Student Login
         </Link>
         <Link
-          to="/mentor-login"
+          to="mentor/mentor-login"
           className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-100 hover:rounded-lg"
         >
           Mentor Login

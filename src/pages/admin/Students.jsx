@@ -2,7 +2,8 @@ import React from 'react'
 
 const Students = () => {
   return (
-    <div>Students</div>
+    <div className='w-screen h-screen bg-black'>
+      Students</div>
   )
 }
 

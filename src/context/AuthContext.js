@@ -77,7 +77,7 @@ export const AuthProvider = ({children}) =>{
                 let data = await response.json();
                 setUser(jwtDecode(data.access))
                 localStorage.setItem("authToken", JSON.stringify(data))
-                navigate('/mentor-panel/mentor-dashboard')
+                navigate('mentor/mentor-panel/mentor-dashboard')
             }else if(response.status === 400) {
                 ErrorMessage({message: "Invalid credentials"})
             }else{

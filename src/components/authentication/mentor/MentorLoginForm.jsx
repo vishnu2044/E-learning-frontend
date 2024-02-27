@@ -76,15 +76,13 @@ const MentorLoginForm = () => {
                     </span>
                 </button>
                 <button type="button"
-                    class="py-1 ml-2 shadow-md hover:bg-black hover:text-white bg-white text-gray-900 border border-gray-200 rounded-lg">
+                    class="py-1 ml-2 shadow-md bg-white text-gray-900 border border-gray-200 rounded-lg">
                     <span
                         class="flex items-center justify-center gap-1 font-medium py-1 px-2.5 text-base false">
                             <FaGithub />
                             Login with GitHub
                     </span>
                 </button>
-
-
             </div>
 
         </div>

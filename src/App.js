@@ -8,17 +8,14 @@ import { CommonDetailsProvider } from './context/common/CommonDetails';
 import AdminPanelRoute from '../src/utilities/AdminPanelPrivateRoute';
 import MentorPanelPrivateRoute from './utilities/MentorPanelPrivateRout';
 import LoadingPage from './pages/LoadingPage';
+import AdminRoutes from './routes/AdminRoutes';
+import MentorRoutes from './routes/MentorRoutes';
 
 // Lazy loading components
 const HomePage = lazy(() => import('../src/pages/Home/HomePage'));
+
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
-const AdminHome = lazy(() => import('./pages/admin/AdminHome'));
-const AdminProfile = lazy(() => import('./pages/admin/adminProfile/AdminProfile'));
-const SiteManagement = lazy(() => import('./pages/admin/siteMangement/SiteManagement'));
-const ManagemenetComponents = lazy(() => import('./components/admin/siteManagement/ManagemenetComponents'));
-const Departments = lazy(() => import('./pages/admin/Departments'));
-const Teachers = lazy(() => import('./pages/admin/Teachers'));
-const Students = lazy(() => import('./pages/admin/Students'));
+
 const MentorSignUp = lazy(() => import('./pages/authentication/mentor/MentorSignUp'));
 const MentorLogin = lazy(() => import('./pages/authentication/mentor/MentorLogin'));
 const MentorPanel = lazy(() => import('./pages/MentorPanel/MentorPanel'));
@@ -39,28 +36,11 @@ function App() {
 
                     <Routes>
                       <Route path="/" element={<HomePage />} />
-                      <Route path="/mentor-signup" element={<MentorSignUp />} />
-                      <Route path="/mentor-login" element={<MentorLogin />} />
 
-                      <Route path="/mentor-panel" element={<MentorPanelPrivateRoute />} >
-                        <Route path="mentor-profile" element={<MentorProfile />} />
-                        <Route path="mentor-dashboard" element={<MentorDashBoard />} />
-                        <Route path="edit-mentor-profile" element={<EditMentorProfile />} />
-                      </Route>
+                      <Route path='/*' element={<AdminRoutes />} />
 
-                      <Route path="/adminlogin" element={<AdminLogin />} />
+                      <Route path='mentor/*' element={<MentorRoutes />} />
 
-                      <Route path="/adminpanel" element={<AdminPanelRoute />}>
-                        <Route path="adminHome" element={<AdminHome />} />
-                        <Route path="adminProfile" element={<AdminProfile />}/>
-                        <Route path="site-management" element={<SiteManagement />}>
-                          <Route path="management-nav" element={<ManagemenetComponents />} />
-                          <Route path="department" element={<Departments />} />
-                          <Route path="students" element={<Students />} />
-                          <Route path="teachers" element={<Teachers />} />
-                        </Route>
-                      </Route>
-                      
                     </Routes>
 
                   </Suspense>
