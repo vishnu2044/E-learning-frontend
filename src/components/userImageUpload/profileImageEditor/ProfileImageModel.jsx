@@ -65,13 +65,12 @@ const ProfileImageModel = ({
         }
         if (!authToken) {
             alert("Auth token is not found");
-            return;
+            window.location.reload()
         }
     
         const base64Data = imgAfterCrop.split(',')[1];
         const blob = await fetch(`data:image/jpeg;base64,${base64Data}`).then(response => response.blob());
         const formData = new FormData();
-        console.log("blob data:::::", blob);
         formData.append("profile_img", blob);
 
     

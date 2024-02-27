@@ -19,7 +19,6 @@ const CoverImageSelector = (
       }
 
       reader.readAsDataURL(event.target.files[0]);
-      SuccessMessage({message: "image selected successfully"})
     }else{
       console.log("No files selected");
       ErrorMessage({message: "image not selected"})

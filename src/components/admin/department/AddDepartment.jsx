@@ -62,7 +62,7 @@ const AddDepartment = (
     <div class="mt-7  rounded-xl shadow-lg  dark:border-gray-700 border-2 border-indigo-300">
       <div class="p-4 sm:p-7">
         <div class="text-center">
-          <h1 class="block text-2xl font-bold text-gray-800 ">Add new Deparment</h1>
+          <h1 class="block text-2xl font-bold text-gray-800 ">Add new Deparment </h1>
         </div>
 
         <div class="mt-5">

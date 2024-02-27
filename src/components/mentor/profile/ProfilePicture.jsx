@@ -9,7 +9,14 @@ import CoverImageModel from '../../userImageUpload/coverImageEditor/CoverImageMo
 
 const ProfilePicture = () => {
   let {user, handleMentorLogout} = useContext(AuthContext)
-  let {profileImg, getUserProfileImg} = useContext(UserImageContext)
+  let {
+      profileImg, 
+      getUserProfileImg,
+
+      coverImg,
+      getCoverImg,
+        } = useContext(UserImageContext)
+
   const [profileImageCropTab, setProfileImageCropTab] = useState(false)
   const [CoverImageModelTab, setCoverImageModelTab] = useState(false)
   const navigate = useNavigate()
@@ -21,11 +28,18 @@ const ProfilePicture = () => {
 
     }
   }, [profileImg])
+
+  useEffect(()=>{
+    if (!coverImg){
+      getCoverImg()
+
+    }
+  }, [coverImg])
   return (
     <>
       <div>
         <div class="relative rounded-t-lg h-80 overflow-hidden object-left ">
-          <img class="object-cover h-40 sm:h-96 overflow-scroll object-top  w-full " src='https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='Mountain' />
+          <img class="object-cover h-40 sm:h-96 overflow-scroll object-top  w-full " src={coverImg ? `${baseUrl}/${coverImg.cover_img_url}` : 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' } alt='Mountain' />
           <button
             onClick={()=> setCoverImageModelTab(true)}
             class="absolute top-36 sm:top-72 right-2 -translate-y-1/2 z-10  bg-gray-900 bg-opacity-70 text-white font-bold px-1 py-1 rounded-full"

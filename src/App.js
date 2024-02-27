@@ -1,103 +1,77 @@
-import './App.css';
+import React, { lazy, Suspense, startTransition } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from '../src/pages/Home/HomePage';
-import AdminLogin from './pages/admin/AdminLogin';
-import AdminPanel from './pages/admin/AdminPanel';
-import StudentPage from './components/admin/students/StudentPage';
-import AdminPrivateRoute from '../src/utilities/PrivateRoute';
-import AdminPanelRoute from '../src/utilities/AdminPanelPrivateRoute';
-
-
 import { AuthProvider } from './context/AuthContext';
-import Teachers from './pages/admin/Teachers';
-import Students from './pages/admin/Students';
-import Departments from './pages/admin/Departments';
-import AdminHome from './pages/admin/AdminHome';
-import AdminProfile from './pages/admin/adminProfile/AdminProfile';
-import { AdminProfileProvider } from './context/admin/AdminProfileContext';
-import MentorSignUp from './pages/authentication/mentor/MentorSignUp';
-import { MentorAuthProvider } from './context/mentor/authentication/MentorAuthentication';
-import MentorLogin from './pages/authentication/mentor/MentorLogin';
-import MentorPanel from './pages/MentorPanel/MentorPanel';
-import MentorPanelPrivateRoute from './utilities/MentorPanelPrivateRout';
-import MentorProfile from './pages/MentorPanel/MentorProfile';
-import MentorDashBoard from './pages/MentorPanel/MentorDashBoard';
-import EditMentorProfile from './pages/MentorPanel/EditMentorProfile';
-import SiteManagement from './pages/admin/siteMangement/SiteManagement';
-import ManagemenetComponents from './components/admin/siteManagement/ManagemenetComponents';
-import { CommonDetailsProvider } from './context/common/CommonDetails';
 import { UserImgProvider } from './context/common/UserImages';
+import { AdminProfileProvider } from './context/admin/AdminProfileContext';
+import { MentorAuthProvider } from './context/mentor/authentication/MentorAuthentication';
+import { CommonDetailsProvider } from './context/common/CommonDetails';
+import AdminPanelRoute from '../src/utilities/AdminPanelPrivateRoute';
+import MentorPanelPrivateRoute from './utilities/MentorPanelPrivateRout';
+import LoadingPage from './pages/LoadingPage';
+
+// Lazy loading components
+const HomePage = lazy(() => import('../src/pages/Home/HomePage'));
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
+const AdminHome = lazy(() => import('./pages/admin/AdminHome'));
+const AdminProfile = lazy(() => import('./pages/admin/adminProfile/AdminProfile'));
+const SiteManagement = lazy(() => import('./pages/admin/siteMangement/SiteManagement'));
+const ManagemenetComponents = lazy(() => import('./components/admin/siteManagement/ManagemenetComponents'));
+const Departments = lazy(() => import('./pages/admin/Departments'));
+const Teachers = lazy(() => import('./pages/admin/Teachers'));
+const Students = lazy(() => import('./pages/admin/Students'));
+const MentorSignUp = lazy(() => import('./pages/authentication/mentor/MentorSignUp'));
+const MentorLogin = lazy(() => import('./pages/authentication/mentor/MentorLogin'));
+const MentorPanel = lazy(() => import('./pages/MentorPanel/MentorPanel'));
+const MentorProfile = lazy(() => import('./pages/MentorPanel/MentorProfile'));
+const MentorDashBoard = lazy(() => import('./pages/MentorPanel/MentorDashBoard'));
+const EditMentorProfile = lazy(() => import('./pages/MentorPanel/EditMentorProfile'));
 
 function App() {
   return (
     <>
       <Router>
-
         <AuthProvider>
-          <UserImgProvider >
+          <UserImgProvider>
             <CommonDetailsProvider>
               <AdminProfileProvider>
                 <MentorAuthProvider>
-                  
-                  <Routes>
-                    <Route Component={HomePage} path='/' exact />
+                  <Suspense fallback={<LoadingPage />}>
 
-                    <Route Component={MentorSignUp} path='/mentor-signup'  />
-                    
-          
-                    <Route Component={MentorLogin} path='/mentor-login' />
+                    <Routes>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/mentor-signup" element={<MentorSignUp />} />
+                      <Route path="/mentor-login" element={<MentorLogin />} />
 
-                    <Route Component={MentorPanelPrivateRoute} path='/mentor-panel'>
-                      <Route Component={MentorProfile} path='mentor-profile' />
-                      <Route Component={MentorDashBoard} path='mentor-dashboard' />
-                      <Route Component={EditMentorProfile} path='edit-mentor-profile' />
-
-
-                    </Route>
-
-                    
-                    <Route Component={AdminLogin} path='/adminlogin' />
-
-                    <Route Component={AdminPanelRoute} path='/adminpanel'>
-                      <Route Component={AdminHome} path='adminHome' />
-                      <Route Component={AdminProfile} path='adminProfile' />
-                      
-                      <Route Component={SiteManagement} path='site-management'>
-                        <Route Component={ManagemenetComponents} path='management-nav' />
-
-                        <Route Component={Departments} path='department' />
-                        <Route Component={Students} path='students' />
-                        <Route Component={Teachers} path='teachers' />
-
+                      <Route path="/mentor-panel" element={<MentorPanelPrivateRoute />} >
+                        <Route path="mentor-profile" element={<MentorProfile />} />
+                        <Route path="mentor-dashboard" element={<MentorDashBoard />} />
+                        <Route path="edit-mentor-profile" element={<EditMentorProfile />} />
                       </Route>
 
-                    </Route>
-                      
-                  </Routes>
+                      <Route path="/adminlogin" element={<AdminLogin />} />
 
+                      <Route path="/adminpanel" element={<AdminPanelRoute />}>
+                        <Route path="adminHome" element={<AdminHome />} />
+                        <Route path="adminProfile" element={<AdminProfile />}/>
+                        <Route path="site-management" element={<SiteManagement />}>
+                          <Route path="management-nav" element={<ManagemenetComponents />} />
+                          <Route path="department" element={<Departments />} />
+                          <Route path="students" element={<Students />} />
+                          <Route path="teachers" element={<Teachers />} />
+                        </Route>
+                      </Route>
+                      
+                    </Routes>
+
+                  </Suspense>
                 </MentorAuthProvider>
               </AdminProfileProvider>
             </CommonDetailsProvider>
           </UserImgProvider>
         </AuthProvider>
-        
       </Router>
     </>
   );
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-

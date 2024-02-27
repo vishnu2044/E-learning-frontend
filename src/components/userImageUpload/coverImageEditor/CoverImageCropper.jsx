@@ -12,23 +12,26 @@ const CoverImageCropper = (
   const [zoom, setZoom] = useState(1)
 
   const [croppedArea, SetCroppedArea] = useState(null)
-  const [[aspectRatio, setAspectRatio]] = useState(1)
+  const [aspectRatio, setAspectRatio] = useState(2/1)
 
-  const oncropComplete = (cropperAreaPercentage, croppedAreaPixels) =>{
+  const onCropComplete = (cropperAreaPercentage, croppedAreaPixels) =>{
     SetCroppedArea(croppedAreaPixels)
   }
 
   return (
     <>
-    <div className='cropper h-80'>
+    <p>Crop image</p>
+    <div className='cropper'>
       <div>
-        <Cropper 
-          image ={image}
+        <Cropper
+
+          image = {image}
           aspect={aspectRatio}
           crop={crop}
+          zoom={zoom}
           onCropChange={setCrop}
           onZoomChange={setZoom}
-          oncropComplete={oncropComplete}
+          onCropComplete={onCropComplete}
           className='p-2'
           style={{
             containerStyle: {
@@ -40,15 +43,12 @@ const CoverImageCropper = (
               marginLeft:'1rem',
               marginBottom:'1rem',
               borderRadius: 15,
-              
             }
           }}
-
         />
-
       </div>
-
-      <div className='aspect-ratios mt-48'>
+    </div>
+      <div className='aspect-ratios pt-36 mt-96'>
         <div className='p-1 flex justify-around'>
           <button
             onClick={()=>{onCropDone(croppedArea)}}
@@ -60,8 +60,6 @@ const CoverImageCropper = (
         </div>
 
       </div>
-
-    </div>
 
     </>
   )
