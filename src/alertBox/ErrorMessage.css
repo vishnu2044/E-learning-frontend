@@ -1,0 +1,6 @@
+.custom-confirm-button-class {
+    background-color: #2c2d2e !important; 
+    border: #2c2d2e !important; 
+    padding: 0.5rem 2rem; /* Adjust the padding values as needed */
+    color: #ffffff;
+}

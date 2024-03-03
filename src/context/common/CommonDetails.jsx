@@ -26,7 +26,6 @@ export const CommonDetailsProvider = ({children}) =>{
             });
             if (response.status === 200){
                 let data = await response.json()
-                console.log("profession dasta ", data)
                 setProfessions(data)
             }else if (response.status === 404){
                 ErrorMessage({message: 'data not found'})

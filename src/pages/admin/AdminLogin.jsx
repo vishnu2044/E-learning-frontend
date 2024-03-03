@@ -70,6 +70,16 @@ const AdminLogin = () => {
                                     </span>
                                 </button>
                             </div>
+                            <div className='flex justify-center mt-6'>
+                                <Link to='/' type="button"
+                                    class="py-1 shadow-md bg-white text-gray-900 border border-gray-200 rounded-lg">
+                                    <span 
+                                        class=" flex items-center justify-center font-medium py-1 px-2.5 text-base false">
+                                            Home
+                                    </span>
+                                </Link>
+
+                            </div>
 
                         </div>
                     </form>

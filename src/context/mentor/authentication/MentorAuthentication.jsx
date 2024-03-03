@@ -1,10 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { ErrorMessage } from "../../../alertBox/ErrorMessage";
 import { validateEmail } from "../../../validation/FormValidation";
 import { isInputEmptyOrSpaces } from "../../FormValidation";
 import { baseUrl } from "../../../configure/urls";
 import { SuccessMessage } from "../../../alertBox/SuccessMessage";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../AuthContext";
 
 
 
@@ -17,8 +18,12 @@ export default MentorAuthcontext;
 export const MentorAuthProvider = ({children}) =>{
 
     const navigate = useNavigate()
+    const {user, authToken} = useContext(AuthContext)
 
+    const [skills, setSkills] = useState([]);
+    const [newSkill, setNewSkill] = useState('');
     
+    // mentor signup
     let sigupMentor = async(e) =>{
         e.preventDefault()
         try{
@@ -70,19 +75,68 @@ export const MentorAuthProvider = ({children}) =>{
                     console.log('error :::::::::::', response.status)
                 }
             }
-
         }catch(errors){
             console.log(errors.response.data);
-            
         }
     }
 
+    const handleAddSkill = () => {
+        if (newSkill.trim() !== '') {
+            setSkills([...skills, newSkill]);
+            setNewSkill('');
+        }
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleAddSkill();
+        }
+    };
+
+    const handleRemoveSkill = (index) => {
+        setSkills(skills.filter((_, i) => i !== index));
+    };
+
+    const editMentorProfile = async(e) =>{
+        e.preventDefault()
+        
+        const formData = new FormData()
+        if (skills.length > 0){
+            console.log("skillss::::", skills);
+            formData.append('skills', skills)
+        }else{
+            console.log("no skills added");
+        }
+        formData.append("username", e.target.username.value)
+        formData.append("education", e.target.education.value)
+        formData.append("profession", e.target.profession.value)
+        formData.append("email", e.target.email.value)
+        formData.append("firstname", e.target.firstname.value)
+        formData.append("lastname", e.target.lastname.value)
+
+        let response = await fetch(`${baseUrl}/mentor-profile/edit-mentor-profile/${user.id}/`,{
+            method: "POST",
+            headers:{
+                'Authorization': 'Bearer ' + authToken.access,  
+            },
+            body: formData
+        })
+        
+
+    }
 
 
     let mentorAuthContextData = {
+        skills:skills,
+        newSkill:newSkill,
 
+        setNewSkill:setNewSkill,
+        handleAddSkill:handleAddSkill,
+        handleRemoveSkill:handleRemoveSkill,
+        handleKeyDown:handleKeyDown,
 
-        sigupMentor: sigupMentor
+        sigupMentor: sigupMentor,
+        editMentorProfile:editMentorProfile
 
     }
 

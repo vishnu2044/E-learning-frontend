@@ -18,12 +18,11 @@ const MentorLoginForm = () => {
                         >Username</label>
                 </div>
                 <div class="flex w-full rounded-lg">
-                    <div class="flex w-full border shadow-md bg-gray-50 border-gray-200 text-gray-900 p-2.5 text-sm rounded-lg">
                         <input
-                            class="border-none focus:outline-none"
+                            class="focus:outline-none flex w-full border shadow-md bg-gray-50 border-gray-200 text-gray-900 p-2.5 text-sm rounded-lg"
                             id="username" type="text" name="username" placeholder="Enter Username"
-                            />
-                    </div>
+                        />
+
                 </div>
             </div>
 
@@ -43,14 +42,12 @@ const MentorLoginForm = () => {
             </div>
             <div class="flex w-full rounded-lg pt-1 pb-4">
                 <div class="relative w-full">
-                    <div className='flex w-full border  shadow-md bg-gray-50 border-gray-200 text-black p-2.5 text-sm rounded-lg'>
                         <input
-                            className='border-none focus:outline-none text-black'
+                            className=' focus:outline-none flex w-full border  shadow-md bg-gray-50 border-gray-200 text-black p-2.5 text-sm rounded-lg'
                             id="password" type='password' name="password" placeholder="Enter your password"
-                            />
+                        />
+                            
 
-                            <p  className='cursor-pointer mt-1'></p>
-                    </div>
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@ import AuthContext from '../../../context/AuthContext';
 
 const AddDepartment = (
     {
-      handleDepartment
+      DisplayAddDepartment
     }
 ) => {
     
@@ -38,7 +38,7 @@ const AddDepartment = (
     
                 if (response.ok) {
                     let data = await response.json();
-                    window.location.reload();
+                    DisplayAddDepartment()
                     SuccessMessage({ message: 'New department added successfully' });
                 } else if (response.status === 400) {
                     ErrorMessage({ message: 'This department already exists!' });
@@ -58,8 +58,18 @@ const AddDepartment = (
     
     
   return (
-<main id="content" role="main" class="w-full  max-w-md mx-auto p-6">
-    <div class="mt-7  rounded-xl shadow-lg  dark:border-gray-700 border-2 border-indigo-300">
+    <>
+
+<div className="fixed z-10 inset-0 overflow-y-auto" id="my-modal">
+      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+          <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" >&#8203;</span>
+        <div className="inline-block align-middle justify-center  transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+
+
+    <div class="mt-7  rounded-xl shadow-lg bg-white ">
       <div class="p-4 sm:p-7">
         <div class="text-center">
           <h1 class="block text-2xl font-bold text-gray-800 ">Add new Deparment </h1>
@@ -90,7 +100,7 @@ const AddDepartment = (
 
                 <div className='flex justify-center'>
                     <button type="submit" class="py-3 px-12 mx-3  inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-black text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">Add</button>
-                    <button onClick={handleDepartment}  class="py-3 px-12 mx-3  inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-black text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                    <button onClick={DisplayAddDepartment} type='nav'  class="py-3 px-12 mx-3  inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-black text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                       Cancel</button>
 
                 </div>
@@ -100,7 +110,18 @@ const AddDepartment = (
       </div>
     </div>
 
-  </main>
+
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+    
+    
+    </>
   )
 }
 

@@ -5,6 +5,7 @@ import EducationList from './education/EducationList'
 import CommonUserDetailsContext from '../../../context/common/CommonDetails'
 import AddProfession from './profession/AddProfession'
 import ProfessionList from './profession/ProfessionList'
+import AddDepartment from '../department/AddDepartment';
 
 const ManagemenetComponents = () => {
     const {getEducationList, getProfessionList} = useContext(CommonUserDetailsContext)
@@ -14,6 +15,8 @@ const ManagemenetComponents = () => {
 
     const [displayAddProfession, setDisplayAddProfession] = useState(false)
     const [displayProfessionList, setDisplayProfessionList]  = useState(false)
+
+    const [AddDepartmentDisplay, setADepartmentDisplay] = useState(false)
     
     const maangeAddEduccation = () =>{
         if (displayAddEdu){
@@ -45,6 +48,16 @@ const ManagemenetComponents = () => {
         }
     }
 
+    const DisplayAddDepartment = () =>{
+        console.log("function working!!");
+        if (AddDepartmentDisplay){
+            setADepartmentDisplay(false)
+        }else{
+            setADepartmentDisplay(true)
+        }
+        
+    }
+
     const manageProfessionList = () =>{
         if (displayProfessionList){
             setDisplayProfessionList(false)
@@ -69,6 +82,9 @@ const ManagemenetComponents = () => {
                                 maangeAddEduccation={maangeAddEduccation} 
                                 manageEduList = {manageEduList}
                                 /> 
+    }
+    {
+        AddDepartmentDisplay && <AddDepartment DisplayAddDepartment={DisplayAddDepartment} />
     }
     {
         displayEducationList && <EducationList
@@ -96,7 +112,7 @@ const ManagemenetComponents = () => {
             <p class="font-semibold text-lg font-sans">Departments</p>
             <div class="flex justify-center gap-4 mt-4">
                 <Link to='/adminpanel/site-management/department' class="px-4 py-2 border cursor-pointer border-gray-200 text-xs font-semibold shadow-md rounded-md m-1">View</Link>
-                <p class="px-4 py-2 border cursor-pointer border-gray-200 text-xs font-semibold shadow-md rounded-md m-1">Add</p>
+                <p onClick={DisplayAddDepartment} class="px-4 py-2 border cursor-pointer border-gray-200 text-xs font-semibold shadow-md rounded-md m-1">Add</p>
             </div>
         </div>
 
