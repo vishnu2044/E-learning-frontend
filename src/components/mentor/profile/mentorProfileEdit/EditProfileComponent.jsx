@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import CommonUserDetailsContext from '../../../../context/common/CommonDetails';
 import MentorAuthcontext from '../../../../context/mentor/authentication/MentorAuthentication';
 import { IoMdCloseCircle } from "react-icons/io";
+import AuthContext from '../../../../context/AuthContext';
+
 
 
 const EditProfileComponent = () => {
@@ -26,6 +28,7 @@ const EditProfileComponent = () => {
   const [indExpCount, setIndExpCount] = useState(300)
   const [TeachExpCount, setTeachExpCount] = useState(300)
   const [introductionCount, setIntroductionCount] = useState(1500)
+  const { authToken } = useContext(AuthContext)
 
   const handelIntroductionCount = (e) =>{
     const textCount = e.target.value.length
@@ -47,9 +50,6 @@ const EditProfileComponent = () => {
     
   }
 
-
-
-
   useEffect(()=>{
     getEducationList()
     getProfessionList()
@@ -63,30 +63,31 @@ const EditProfileComponent = () => {
       <div className=' mx-3 font-normal mb-4'>
 
         <div className='w-full sm:flex justify-between  px-2 mb-4 sm:mb-0'>
-
+{/* input for username */}
           <div className="mb-2 mx-2 w-full sm:w-1/3 ">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">Username:</label>
             <input 
-              className="focus:outline-none flex w-full border border-gray-300 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
+              className="focus:outline-none flex w-full border border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
               type="text" 
               name="username" 
               placeholder="Enter your username"  />
           </div>
-          
+{/* input for email           */}
           <div className="mb-2 mx-2 w-full sm:w-1/3">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">Email:</label>
             <input 
-              className="focus:outline-none flex w-full border border-gray-300 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
+              className="focus:outline-none flex w-full border border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
               type="text" 
               name="email" 
               id="name" 
               placeholder="Enter your email"  />
           </div>
 
+{/* input for first name   */}
           <div className="mb-2 mx-2 w-full sm:w-1/3">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">First Name:</label>
             <input 
-              className="focus:outline-none flex w-full border border-gray-300 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
+              className="focus:outline-none flex w-full border border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
               type="text" 
               name="firstname" 
               id="name" 
@@ -96,10 +97,11 @@ const EditProfileComponent = () => {
 
         <div className='w-full sm:flex justify-between  px-2 mb-4 sm:mb-0'>
 
+{/* input for lase name   */}
           <div className="mb-2 mx-2 w-full sm:w-1/3">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">Last Name:</label>
             <input 
-              className="focus:outline-none flex w-full border border-gray-300 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
+              className="focus:outline-none flex w-full border border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
               type="text" 
               name="lastname" 
               id="name" 
@@ -108,10 +110,11 @@ const EditProfileComponent = () => {
                />
           </div>
           
+{/* input for profession   */}  
           <div className="mb-2 mx-2 w-full sm:w-1/3">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">Profession:</label>
             <select
-              className="focus:outline-none flex w-full border border-gray-300 my-2 shadow-md bg-gray-50 text-gray-900 p-2.5 text-sm rounded-md"
+              className="focus:outline-none flex w-full border border-gray-400 my-2 shadow-md bg-gray-50 text-gray-900 p-2.5 text-sm rounded-md"
               name="profession"
             >
               <option value="">Select your Profession</option>
@@ -122,10 +125,12 @@ const EditProfileComponent = () => {
               }
             </select>
           </div>
+
+{/* input for education   */}
           <div className="mb-2 mx-2 w-full sm:w-1/3">
             <label htmlFor="name" className="text-sm font-medium text-gray-700"> Education:</label>
             <select
-              className="focus:outline-none flex w-full border border-gray-300 my-2 shadow-md bg-gray-50 text-gray-900 p-2.5 text-sm rounded-md"
+              className="focus:outline-none flex w-full border border-gray-400 my-2 shadow-md bg-gray-50 text-gray-900 p-2.5 text-sm rounded-md"
               name="education"
 
             >
@@ -138,14 +143,16 @@ const EditProfileComponent = () => {
             </select>
 
           </div>
+
         </div>
 
         <div className='w-full sm:flex justify-between  px-2 mb-4 sm:mb-0'>
 
-          <div className="mb-2 mx-2 w-full sm:w-1/3">
+{/* input for contact number   */}
+          <div className="mb-2 mx-2 w-full sm:w-1/2">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">Contact Number:</label>
             <input 
-              className="focus:outline-none  flex w-full border border-gray-300 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
+              className="focus:outline-none  flex w-full border border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
               type="tel" 
               name="contactNumber" 
               id="name" 
@@ -154,10 +161,27 @@ const EditProfileComponent = () => {
            />
           </div>
 
-          <div className="mb-2 mx-2 w-full sm:w-1/3">
+{/* input of place */}
+          <div className="mb-2 mx-2 w-full sm:w-1/2">
+            <label htmlFor="name" className="text-sm font-medium text-gray-700">Place:</label>
+              <input 
+                className="focus:outline-none w-full flex justify-between border  border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
+                type="text" 
+                name="place" 
+                id="place" 
+                placeholder="Tell us about your Teaching experience" 
+            />
+          </div>
+          
+        </div>
+
+        <div className='w-full sm:flex justify-between  px-2 mb-4 sm:mb-0'>
+
+{/* input for industrial experience  */}
+          <div className="mb-2 mx-2 w-full sm:w-1/2">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">Industrial Experience:</label>
 
-            <div className={`flex justify-between w-full border  border-gray-300 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md`}>
+            <div className={`flex justify-between w-full border  border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md`}>
               
               <input 
                 className={`focus:outline-none w-5/6 `} 
@@ -174,9 +198,10 @@ const EditProfileComponent = () => {
 
           </div>
 
-          <div className="mb-2 mx-2 w-full sm:w-1/3">
+{/* input for teaching experience   */}
+          <div className="mb-2 mx-2 w-full sm:w-1/2">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">Teaching Experience:</label>
-            <div className='flex justify-between w-full border  border-gray-300 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md'>
+            <div className='flex justify-between w-full border  border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md'>
               <input 
                 className="focus:outline-none w-5/6 "
                 type="text" 
@@ -196,9 +221,10 @@ const EditProfileComponent = () => {
 
         <div className='w-full px-2 mb-4 sm:mb-0'>
 
+{/* input for your self introduction  */}
           <div className="mb-2 px-2 w-full">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">Intorduction about you:</label>
-            <div className='flex justify-between w-full border border-gray-300 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md'>
+            <div className='flex justify-between w-full border border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md'>
               <input 
                 className="focus:outline-none w-11/12"
                 type="text" 
@@ -216,6 +242,7 @@ const EditProfileComponent = () => {
 
         </div>
 
+{/* input for skills list  */}
         <div className="w-full px-3 mb-4 sm:mb-0">
                 <label htmlFor="skills" className="text-sm font-medium text-gray-700">Skills:</label>
                 <div className="flex flex-wrap items-center py-3">
@@ -228,14 +255,16 @@ const EditProfileComponent = () => {
                             </div>
                         </div>
                     ))}
-                    <div className='flex justify-between w-full border  border-gray-300 my-2 shadow-md bg-gray-50 text-gray-900 py-2.5 text-sm rounded-md'>
+                    <div className='flex justify-between w-full border  border-gray-400 my-2 shadow-md bg-gray-50 text-gray-900 py-2.5 text-sm rounded-md'>
                       <input
                           type="text"
+                          cla
                           value={newSkill}
                           onChange={(e) => setNewSkill(e.target.value)}
                           onKeyDown={handleKeyDown}
                           placeholder="Type a skill...  (press enter to add new )"
-                          className="focus:outline-none w-1/2"
+                          className="focus:outline-none w-1/2 mx-2"
+                          onKeyDown={handleKeyDown}
                       />
                       <button type="button" onClick={handleAddSkill} className="bg-gray-500 text-white px-4 py-2 rounded-md mx-2">Add</button>
                     </div>
@@ -243,6 +272,8 @@ const EditProfileComponent = () => {
             </div>
 
       </div>
+
+
       <div className='flex justify-between mx-3 gap-3 mb-4'>
         <button type='submit' className="transition-colors text-white shadow-md bg-gray-950 py-2  cursor-pointer px-4 sm:mx-18 mx-2 mt-6  border border-gray-200 font-semibold w-full rounded">
           Update</button>

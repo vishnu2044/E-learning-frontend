@@ -97,15 +97,18 @@ export const MentorAuthProvider = ({children}) =>{
         setSkills(skills.filter((_, i) => i !== index));
     };
 
+
     const editMentorProfile = async(e) =>{
+
         e.preventDefault()
-        
+
         const formData = new FormData()
+        console.log("form submitted");
         if (skills.length > 0){
             console.log("skillss::::", skills);
-            formData.append('skills', skills)
+                  formData.append('skills', skills)
         }else{
-            console.log("no skills added");
+        console.log("no skills added");
         }
         formData.append("username", e.target.username.value)
         formData.append("education", e.target.education.value)
@@ -113,7 +116,7 @@ export const MentorAuthProvider = ({children}) =>{
         formData.append("email", e.target.email.value)
         formData.append("firstname", e.target.firstname.value)
         formData.append("lastname", e.target.lastname.value)
-
+      
         let response = await fetch(`${baseUrl}/mentor-profile/edit-mentor-profile/${user.id}/`,{
             method: "POST",
             headers:{
@@ -121,8 +124,6 @@ export const MentorAuthProvider = ({children}) =>{
             },
             body: formData
         })
-        
-
     }
 
 
