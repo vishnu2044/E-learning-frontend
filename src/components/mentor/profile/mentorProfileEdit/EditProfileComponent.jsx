@@ -3,6 +3,7 @@ import CommonUserDetailsContext from '../../../../context/common/CommonDetails';
 import MentorAuthcontext from '../../../../context/mentor/authentication/MentorAuthentication';
 import { IoMdCloseCircle } from "react-icons/io";
 import AuthContext from '../../../../context/AuthContext';
+import MentorPfrofilecontext from '../../../../context/mentor/profile/MentorProfileContext';
 
 
 
@@ -23,7 +24,7 @@ const EditProfileComponent = () => {
     handleKeyDown,
     setNewSkill,
     editMentorProfile
-  } = useContext(MentorAuthcontext)
+  } = useContext(MentorPfrofilecontext)
 
   const [indExpCount, setIndExpCount] = useState(300)
   const [TeachExpCount, setTeachExpCount] = useState(300)
@@ -229,7 +230,7 @@ const EditProfileComponent = () => {
                 className="focus:outline-none w-11/12"
                 type="text" 
                 name="mentorIntro" 
-                id="name" 
+                id="selfIntro" 
                 placeholder="Tell us about your self" 
                 onChange={handelIntroductionCount}
               />
@@ -243,7 +244,22 @@ const EditProfileComponent = () => {
         </div>
 
 {/* input for skills list  */}
-        <div className="w-full px-3 mb-4 sm:mb-0">
+
+
+      </div>
+
+
+      <div className='flex justify-between mx-3 gap-3 mb-4'>
+        <button type="submit" className="transition-colors text-white shadow-md bg-gray-950 py-2  cursor-pointer px-4 sm:mx-18 mx-2 mt-6  border border-gray-200 font-semibold w-full rounded">
+          Update</button>
+        <button className="transition-colors text-white shadow-md bg-gray-950 py-2  cursor-pointer px-4 sm:mx-18 mx-2 mt-6  border border-gray-200 font-semibold w-full rounded">
+          Back</button>
+      </div>
+
+
+
+    </form>
+    <div className="w-full px-3 mb-4 sm:mb-0">
                 <label htmlFor="skills" className="text-sm font-medium text-gray-700">Skills:</label>
                 <div className="flex flex-wrap items-center py-3">
                     {skills.map((skill, index) => (
@@ -262,28 +278,13 @@ const EditProfileComponent = () => {
                           value={newSkill}
                           onChange={(e) => setNewSkill(e.target.value)}
                           onKeyDown={handleKeyDown}
-                          placeholder="Type a skill...  (press enter to add new )"
+                          placeholder="Type a skill..."
                           className="focus:outline-none w-1/2 mx-2"
-                          onKeyDown={handleKeyDown}
                       />
-                      <button type="button" onClick={handleAddSkill} className="bg-gray-500 text-white px-4 py-2 rounded-md mx-2">Add</button>
                     </div>
+                      <button type="button" onClick={(e) => handleAddSkill(e)} className="bg-gray-500 text-white px-4 py-2 rounded-md mx-2">Add</button>
                 </div>
             </div>
-
-      </div>
-
-
-      <div className='flex justify-between mx-3 gap-3 mb-4'>
-        <button type='submit' className="transition-colors text-white shadow-md bg-gray-950 py-2  cursor-pointer px-4 sm:mx-18 mx-2 mt-6  border border-gray-200 font-semibold w-full rounded">
-          Update</button>
-        <button className="transition-colors text-white shadow-md bg-gray-950 py-2  cursor-pointer px-4 sm:mx-18 mx-2 mt-6  border border-gray-200 font-semibold w-full rounded">
-          Back</button>
-      </div>
-
-
-
-    </form>
 
 </div>
 

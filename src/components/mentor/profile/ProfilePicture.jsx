@@ -8,9 +8,11 @@ import { MdModeEditOutline } from "react-icons/md";
 import CoverImageModel from '../../userImageUpload/coverImageEditor/CoverImageModel'
 import userimg from '../../../assets/Images/user.png';
 import coverImage from '../../../assets/Images/noCoverImg.png'
+import MentorPfrofilecontext from '../../../context/mentor/profile/MentorProfileContext'
 
 const ProfilePicture = () => {
   let {user, handleMentorLogout} = useContext(AuthContext)
+  let {getMentorProfile} = useContext(MentorPfrofilecontext)
   let {
       profileImg, 
       getUserProfileImg,
@@ -30,6 +32,10 @@ const ProfilePicture = () => {
 
     }
   }, [profileImg])
+
+  useEffect(()=>{
+    getMentorProfile()
+  }, [])
 
   useEffect(()=>{
     if (!coverImg){
