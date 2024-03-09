@@ -150,7 +150,7 @@ export const AuthProvider = ({children}) =>{
         handleAdminLogin:handleAdminLogin,
         handleAdminLogout:handleAdminLogout,
         
-
+        updateToken:updateToken,
         handleMentorLogin: handleMentorLogin,
         handleMentorLogout:handleMentorLogout,
     

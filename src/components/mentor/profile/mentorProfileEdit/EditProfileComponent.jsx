@@ -18,6 +18,9 @@ const EditProfileComponent = () => {
   const {
     skills,
     newSkill,
+    
+    mentorProfileData,
+    getMentorProfile,
 
     handleAddSkill,
     handleRemoveSkill,
@@ -29,7 +32,7 @@ const EditProfileComponent = () => {
   const [indExpCount, setIndExpCount] = useState(300)
   const [TeachExpCount, setTeachExpCount] = useState(300)
   const [introductionCount, setIntroductionCount] = useState(1500)
-  const { authToken } = useContext(AuthContext)
+  const { authToken, user } = useContext(AuthContext)
 
   const handelIntroductionCount = (e) =>{
     const textCount = e.target.value.length
@@ -50,10 +53,12 @@ const EditProfileComponent = () => {
     setIndExpCount(remainingCount)
     
   }
+  
 
   useEffect(()=>{
     getEducationList()
     getProfessionList()
+    getMentorProfile()
   }, [])
   return (
   <div className='sm:max-w-6xl p-3 max-w-5xl mx-auto mt-16 sm:mt-6 border border-gray-300 bg-white shadow-xl rounded-lg text-gray-900'>
@@ -71,17 +76,21 @@ const EditProfileComponent = () => {
               className="focus:outline-none flex w-full border border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
               type="text" 
               name="username" 
-              placeholder="Enter your username"  />
+              placeholder= {user?.username ? user.username : "Enter your username"}  
+              defaultValue= {user?.username ? user.username : "Enter your username"}  
+              />
           </div>
 {/* input for email           */}
           <div className="mb-2 mx-2 w-full sm:w-1/3">
             <label htmlFor="name" className="text-sm font-medium text-gray-700">Email:</label>
             <input 
               className="focus:outline-none flex w-full border border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
-              type="text" 
+              type="email" 
               name="email" 
               id="name" 
-              placeholder="Enter your email"  />
+              placeholder={user?.email ? user.email : "Enter your Email"}
+              defaultValue={user?.email ? user.email : "Enter your Email"}
+                />
           </div>
 
 {/* input for first name   */}
@@ -91,9 +100,12 @@ const EditProfileComponent = () => {
               className="focus:outline-none flex w-full border border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
               type="text" 
               name="firstname" 
-              id="name" 
-              placeholder="Enter your first name"  />
+              id="firstname" 
+              placeholder={user?.first_name ? user?.first_name : "Enter your first name"}  
+              defaultValue={user?.first_name ? user?.first_name : ""}  
+              />
           </div>
+
         </div>
 
         <div className='w-full sm:flex justify-between  px-2 mb-4 sm:mb-0'>
@@ -105,8 +117,9 @@ const EditProfileComponent = () => {
               className="focus:outline-none flex w-full border border-gray-400 my-2 shadow-md bg-gray-50  text-gray-900 p-2.5 text-sm rounded-md"
               type="text" 
               name="lastname" 
-              id="name" 
-              placeholder="Enter your last name" 
+              id="lastname" 
+              placeholder={user?.last_name ? user.last_name : "Enter your last name"} 
+              defaultValue={user?.last_name ?  user?.last_name : "" } 
 
                />
           </div>
@@ -118,7 +131,7 @@ const EditProfileComponent = () => {
               className="focus:outline-none flex w-full border border-gray-400 my-2 shadow-md bg-gray-50 text-gray-900 p-2.5 text-sm rounded-md"
               name="profession"
             >
-              <option value="">Select your Profession</option>
+              <option value={mentorProfileData?.profession ? mentorProfileData?.profession : ""}>{mentorProfileData?.profession ? mentorProfileData.profession : 'Select your Profession'}</option>
               {
                 professions ? professions.map((profession, index) => (
                   <option key={index} value={profession.profession}>{profession.profession}</option>
@@ -135,7 +148,7 @@ const EditProfileComponent = () => {
               name="education"
 
             >
-              <option value="">Select your education</option>
+              <option value={mentorProfileData?.education ? mentorProfileData?.education : ""}>{mentorProfileData?.education ? mentorProfileData.education : 'Select your education'}</option>
               {
                 educationList ? educationList.map((edu, index) => (
                   <option key={edu.education} value={edu.education}>{edu.education}</option>
@@ -157,7 +170,8 @@ const EditProfileComponent = () => {
               type="tel" 
               name="contactNumber" 
               id="name" 
-              placeholder="Enter your contact number" 
+              placeholder={mentorProfileData?.contact_number ? mentorProfileData?.contact_number :"Enter your contact number"} 
+              defaultValue={mentorProfileData?.contact_number ? mentorProfileData?.contact_number :""} 
 
            />
           </div>
@@ -170,7 +184,8 @@ const EditProfileComponent = () => {
                 type="text" 
                 name="place" 
                 id="place" 
-                placeholder="Tell us about your Teaching experience" 
+                placeholder={mentorProfileData?.place ? mentorProfileData?.place :"Enter your place"} 
+                defaultValue={mentorProfileData?.place ? mentorProfileData?.place :""} 
             />
           </div>
           
@@ -190,7 +205,8 @@ const EditProfileComponent = () => {
                 name="industrialExperience" 
                 onChange={handleIndustrialExpLength}
                 id="name" 
-                placeholder="Tell us about your industrial experience" 
+                defaultValue={mentorProfileData?.industrialExperience ? mentorProfileData?.industrialExperience :""} 
+                placeholder={mentorProfileData?.industrialExperience ? mentorProfileData?.industrialExperience :"Tell us about your industrial experience"} 
                 
             />
             <p className={`${indExpCount < 0? 'text-red-600' : 'text-black'}`}>{indExpCount}</p>
@@ -209,7 +225,8 @@ const EditProfileComponent = () => {
                 name="teachingExperience" 
                 onChange={handleTeachingExpLength}
                 id="name" 
-                placeholder="Tell us about your Teaching experience" 
+                placeholder={mentorProfileData?.teachingExperience ? mentorProfileData?.teachingExperience :"Tell us about your Teaching experience"} 
+                defaultValue={mentorProfileData?.teachingExperience ? mentorProfileData?.teachingExperience :""} 
 
             />
             <p className={`${TeachExpCount < 0? 'text-red-600' : 'text-black'}`}>{TeachExpCount}</p>
@@ -231,7 +248,8 @@ const EditProfileComponent = () => {
                 type="text" 
                 name="mentorIntro" 
                 id="selfIntro" 
-                placeholder="Tell us about your self" 
+                placeholder={mentorProfileData?.selfIntro  ? mentorProfileData?.selfIntro   :"Tell us about your self"}
+                defaultValue={mentorProfileData?.selfIntro   ? mentorProfileData?.selfIntro  :""}
                 onChange={handelIntroductionCount}
               />
               <p className={`${introductionCount < 0 ? 'text-red-600' : 'text-black'}`} >{introductionCount}</p>

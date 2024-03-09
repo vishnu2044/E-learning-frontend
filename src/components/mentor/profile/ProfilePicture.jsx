@@ -69,21 +69,7 @@ const ProfilePicture = () => {
                   </button>
           </div>
           
-          <div class="flex justify-end text-center mt-2 pb-2">
-            <div className='flex flex-col sm:flex-row justify-between w-full sm:w-3/5'>
 
-              <div className="mb-2 sm:mb-0">
-                <h2 class="font-semibold">{user ? user.username : "username"}</h2>
-                <p class="text-gray-500">Freelance Web Designer</p>
-              </div>
-
-              <div className='flex justify-between items-center sm:ml-3'>
-                <p onClick={()=> navigate("/mentor/mentor-panel/edit-mentor-profile")} className='p-2 mx-2 my-1 sm:my-0 bg-gray-50 cursor-pointer border border-gray-200 shadow-sm rounded-md transition duration-300 ease-in-out hover:bg-gray-700 hover:text-white'>Edit Profile</p>
-                <p onClick={()=>handleMentorLogout()} className='p-2 mx-2 my-1 sm:my-0 bg-gray-50 cursor-pointer border border-gray-200 shadow-sm rounded-md transition duration-300 ease-in-out hover:bg-gray-700 hover:text-white'>Logout</p>
-              </div>
-
-            </div>              
-          </div>
 
 
       </div>

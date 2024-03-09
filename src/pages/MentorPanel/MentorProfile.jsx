@@ -1,10 +1,16 @@
 import React from 'react'
 import MentorProfileCard from '../../components/mentor/profile/MentorProfileCard'
+import MentorProfileDetails from '../../components/mentor/profile/MentorProfileDetails'
 
 const MentorProfile = () => {
   return (
     <>
-      <MentorProfileCard />
+      <div className='my-4 pb-8'>
+        <MentorProfileCard />
+        <MentorProfileDetails />
+
+      </div>
+
     </>
   )
 }
