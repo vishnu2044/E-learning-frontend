@@ -1,7 +1,7 @@
 import { createContext, useState, useContext} from "react";
 import { baseUrl } from "../../../configure/urls";
 import AuthContext from "../../AuthContext";
-import { useNavigate } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import { SuccessMessage } from "../../../alertBox/SuccessMessage";
 import { ErrorMessage } from "../../../alertBox/ErrorMessage";
 
@@ -17,6 +17,7 @@ export const MentorProfileProvider = ({children}) =>{
     const [mentorProfileData, setMentorProfileData] = useState(null)
 
     const [skills, setSkills] = useState([]);
+    const [userSkills, setUserSkills] = useState([])
     const [newSkill, setNewSkill] = useState('');
 
     const handleAddSkill = () => {
@@ -36,6 +37,48 @@ export const MentorProfileProvider = ({children}) =>{
         setSkills(skills.filter((_, i) => i !== index));
     };
 
+    const updateSkills = async() =>{
+        if (skills.length > 0){
+            console.log("skills ::::::::", skills);
+            SuccessMessage({message: "skills present"})
+            let formData = new FormData()
+            formData.append("skills", skills)
+            let response = await fetch(`${baseUrl}/mentor-profile/update-skills/${user.id}/`, {
+                method: "POST",
+                headers: {
+                    'Authorization': 'Bearer ' + authToken.access
+                },
+                body: formData
+            })
+            if (response.status === 200){
+                SuccessMessage({message: "data submitted successfully !"})
+            }else{
+                ErrorMessage({message: "check console"})
+                console.log("error while updating skilles::::::::::::::::::",response.status);
+            }
+        }else{
+            console.log("no skills added");
+            ErrorMessage({message: "not  skills added"})
+        }
+    }
+
+    const getSkills = async() =>{
+        let response = await fetch(`${baseUrl}/mentor-profile/get-mentor-skills/${user.id}/`, {
+            method: "GET",
+            headers:{
+                'Authorization': 'Bearer ' + authToken.access,  
+            },
+        })
+        const data = await response.json()
+        if (response.status === 200){
+            console.log(data);
+            setUserSkills(data.skills)
+            SuccessMessage({message: "skills get to frontend"})
+        }else{
+            ErrorMessage({message: " check console"})
+            console.log(response.status);
+        }
+    }
 
     const getMentorProfile = async() => {
         
@@ -98,14 +141,19 @@ export const MentorProfileProvider = ({children}) =>{
         userCheck:userCheck,
         skills:skills,
         newSkill:newSkill,
+        userSkills:userSkills,
         mentorProfileData:mentorProfileData,
 
-        getMentorProfile:getMentorProfile,
 
-        setNewSkill:setNewSkill,
-        handleAddSkill:handleAddSkill,
-        handleRemoveSkill:handleRemoveSkill,
-        handleKeyDown:handleKeyDown,
+        getMentorProfile: getMentorProfile,
+
+        setNewSkill: setNewSkill,
+        handleAddSkill: handleAddSkill,
+        handleRemoveSkill: handleRemoveSkill,
+        handleKeyDown: handleKeyDown,
+        updateSkills: updateSkills,
+        getSkills:getSkills,
+
         editMentorProfile:editMentorProfile
 
 
