@@ -1,4 +1,4 @@
-import { createContext, useState, useContext} from "react";
+import { createContext, useState, useContext, useEffect} from "react";
 import { baseUrl } from "../../../configure/urls";
 import AuthContext from "../../AuthContext";
 import { Form, useNavigate } from 'react-router-dom';
@@ -16,9 +16,11 @@ export const MentorProfileProvider = ({children}) =>{
 
     const [mentorProfileData, setMentorProfileData] = useState(null)
 
+
     const [skills, setSkills] = useState([]);
-    const [userSkills, setUserSkills] = useState([])
+    const [userSkills, setUserSkills] = useState()
     const [newSkill, setNewSkill] = useState('');
+    const [skillUpdateCheck, setSkillUpdateCheck] = useState(false)
 
     const handleAddSkill = () => {
         if (newSkill.trim() !== '') {
@@ -52,6 +54,7 @@ export const MentorProfileProvider = ({children}) =>{
             })
             if (response.status === 200){
                 SuccessMessage({message: "data submitted successfully !"})
+                setSkillUpdateCheck(true)
             }else{
                 ErrorMessage({message: "check console"})
                 console.log("error while updating skilles::::::::::::::::::",response.status);
@@ -62,24 +65,38 @@ export const MentorProfileProvider = ({children}) =>{
         }
     }
 
-    const getSkills = async() =>{
-        let response = await fetch(`${baseUrl}/mentor-profile/get-mentor-skills/${user.id}/`, {
+    const getSkills = async () => {
+        try {
+          let response = await fetch(`${baseUrl}/mentor-profile/get-mentor-skills/${user.id}/`, {
             method: "GET",
-            headers:{
-                'Authorization': 'Bearer ' + authToken.access,  
+            headers: {
+              'Authorization': 'Bearer ' + authToken.access,
             },
-        })
-        const data = await response.json()
-        if (response.status === 200){
-            console.log(data);
-            setUserSkills(data.skills)
-            SuccessMessage({message: "skills get to frontend"})
-        }else{
-            ErrorMessage({message: " check console"})
+          });
+      
+          if (response.status === 200) {
+            let data = await response.json();
+            console.log("skills ::::::::", data);
+            
+            setUserSkills(data);
+            SuccessMessage({ message: "Skills retrieved successfully" });
+          } else {
+            if (response.status === 401) {
+              ErrorMessage({ message: "Unauthorized: User not found" });
+            } else {
+              ErrorMessage({ message: "An error occurred. Please check console for details" });
+            }
             console.log(response.status);
-        }
-    }
+          }
 
+          console.log(userSkills);
+        } catch (error) {
+          console.error("Error fetching skills:", error);
+          
+          ErrorMessage({ message: "An unexpected error occurred" });
+        }
+      };
+      
     const getMentorProfile = async() => {
         
         let response = await fetch(`${baseUrl}/mentor-profile/get-mentor-profile/${user.id}/`, {
@@ -143,6 +160,7 @@ export const MentorProfileProvider = ({children}) =>{
         newSkill:newSkill,
         userSkills:userSkills,
         mentorProfileData:mentorProfileData,
+        skillUpdateCheck:skillUpdateCheck,
 
 
         getMentorProfile: getMentorProfile,

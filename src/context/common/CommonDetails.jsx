@@ -51,6 +51,7 @@ export const CommonDetailsProvider = ({children}) =>{
             if (response.status === 200){
                 let data = await response.json()
                 setEducationList(data)
+                console.log("edu list:::::::::", data);
             }else if (response.status === 404){
                 ErrorMessage({message: 'data not found'})
             }else{

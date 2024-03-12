@@ -8,10 +8,12 @@ import { IoMdCloseCircle } from "react-icons/io";
 import MentorSkills from './mentorDetails/MentorSkills';
 import EditMentorSkills from './mentorDetails/EditMentorSkills';
 import MentorPfrofilecontext from '../../../context/mentor/profile/MentorProfileContext';
+import { RemoveMentorSkills } from './mentorDetails/RemoveMentorSkills';
 
 
 const MentorProfileDetails = () => {
   const [displayEditSkills, setDisplayEditSkills] = useState(false)
+  const [displaySkillsRemove, setDisplaySkillsRemove] = useState(true)
   let {getSkills} = useContext(MentorPfrofilecontext)
 
   const handleDisplayEditSkill = () =>{
@@ -34,6 +36,9 @@ const MentorProfileDetails = () => {
         <MentorSkills handleDisplayEditSkill = {handleDisplayEditSkill} />
         {
           displayEditSkills && <EditMentorSkills handleDisplayEditSkill = {handleDisplayEditSkill} />
+        }
+        {
+          displaySkillsRemove && <RemoveMentorSkills />
         }
         
       </div>

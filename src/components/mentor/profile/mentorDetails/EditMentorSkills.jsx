@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import MentorPfrofilecontext from '../../../../context/mentor/profile/MentorProfileContext'
 import { IoMdCloseCircle } from "react-icons/io";
 
@@ -14,8 +14,17 @@ const EditMentorSkills = ({
         handleRemoveSkill,
         handleKeyDown,
         setNewSkill,
-        updateSkills
+        updateSkills,
+        skillUpdateCheck,
+        getSkills
     } = useContext(MentorPfrofilecontext)
+    useEffect(()=>{
+        if (skillUpdateCheck){
+            handleDisplayEditSkill()
+            getSkills()
+        }
+
+    }, [skillUpdateCheck])
   return (
 <div className="fixed z-10 inset-0 overflow-y-auto" id="my-modal">
     <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
