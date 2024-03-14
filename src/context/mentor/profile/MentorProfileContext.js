@@ -10,7 +10,6 @@ const MentorPfrofilecontext = createContext()
 export default MentorPfrofilecontext;
 
 export const MentorProfileProvider = ({children}) =>{
-    const [userCheck, setUserCheck ] = useState(10)
     const navigate = useNavigate()
     const {user, authToken, updateToken} = useContext(AuthContext)
 
@@ -26,6 +25,7 @@ export const MentorProfileProvider = ({children}) =>{
         if (newSkill.trim() !== '') {
             setSkills([...skills, newSkill]);
             setNewSkill('');
+            console.log("skills in list format ::::::", skills);
         }
     };
 
@@ -41,7 +41,6 @@ export const MentorProfileProvider = ({children}) =>{
 
     const updateSkills = async() =>{
         if (skills.length > 0){
-            console.log("skills ::::::::", skills);
             SuccessMessage({message: "skills present"})
             let formData = new FormData()
             formData.append("skills", skills)
@@ -60,7 +59,6 @@ export const MentorProfileProvider = ({children}) =>{
                 console.log("error while updating skilles::::::::::::::::::",response.status);
             }
         }else{
-            console.log("no skills added");
             ErrorMessage({message: "not  skills added"})
         }
     }
@@ -75,21 +73,17 @@ export const MentorProfileProvider = ({children}) =>{
           });
       
           if (response.status === 200) {
-            let data = await response.json();
-            console.log("skills ::::::::", data);
-            
+            let data = await response.json();        
             setUserSkills(data);
-            SuccessMessage({ message: "Skills retrieved successfully" });
           } else {
             if (response.status === 401) {
               ErrorMessage({ message: "Unauthorized: User not found" });
             } else {
               ErrorMessage({ message: "An error occurred. Please check console for details" });
+              console.log(response.status);
             }
-            console.log(response.status);
           }
 
-          console.log(userSkills);
         } catch (error) {
           console.error("Error fetching skills:", error);
           
@@ -108,7 +102,6 @@ export const MentorProfileProvider = ({children}) =>{
         const data = await response.json()
         if (response.status === 200){
             setMentorProfileData(data)
-            console.log("mentor data:::::::", data);    
         }else if (response.status === 401){
             ErrorMessage({message: "authentication error"})
         }else if (response.status === 405){
@@ -122,8 +115,6 @@ export const MentorProfileProvider = ({children}) =>{
         e.preventDefault()
 
         const formData = new FormData()
-        console.log("form submitted");
-
         formData.append("username", e.target.username.value)
         formData.append("education", e.target.education.value)
         formData.append("profession", e.target.profession.value)
@@ -135,11 +126,6 @@ export const MentorProfileProvider = ({children}) =>{
         formData.append("industrialExperience", e.target.industrialExperience.value)
         formData.append("teachingExperience", e.target.teachingExperience.value)
         formData.append("selfIntro", e.target.selfIntro.value)
-
-        console.log("first name:::::::", e.target.firstname.value);
-        console.log("first email:::::::", e.target.email.value);
-        
-        console.log("user:::::::", user.id);
         let response = await fetch(`${baseUrl}/mentor-profile/edit-mentor-profile/${user.id}/`,{
             method: "POST",
             headers:{
@@ -150,12 +136,11 @@ export const MentorProfileProvider = ({children}) =>{
         if (response.status === 200){
             SuccessMessage({message: "profile updated"})
             navigate("/mentor/mentor-panel/mentor-profile")
-            // need to more complete
+            
         }
     }
 
     let MentorProfileContextData = {
-        userCheck:userCheck,
         skills:skills,
         newSkill:newSkill,
         userSkills:userSkills,

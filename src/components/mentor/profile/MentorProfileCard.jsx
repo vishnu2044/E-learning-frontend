@@ -7,7 +7,7 @@ import { FaGraduationCap } from "react-icons/fa";
 
 
 const MentorProfileCard = () => {
-    const { userCheck, 
+    const { 
             getMentorProfile,
             mentorProfileData
                 } = useContext(MentorPfrofilecontext)
@@ -51,7 +51,7 @@ const MentorProfileCard = () => {
                 <h2 class="font-semibold p-2">Blogs</h2>
                 <div className='w-auto h-auto r p-2 text-center text-gray-500 '>1k </div>
             </div>
-            {userCheck}
+
 
             <div class="flex justify-between text-left mt-2 border border-gray-200 shadow-sm rounded-lg cursor-pointer sm:w-1/3 pb-2  m-2 p-3 ">
                 <h2 class="font-semibold p-2">Followers</h2>

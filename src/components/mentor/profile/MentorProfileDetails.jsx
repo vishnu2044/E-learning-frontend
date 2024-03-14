@@ -13,11 +13,19 @@ import { RemoveMentorSkills } from './mentorDetails/RemoveMentorSkills';
 
 const MentorProfileDetails = () => {
   const [displayEditSkills, setDisplayEditSkills] = useState(false)
-  const [displaySkillsRemove, setDisplaySkillsRemove] = useState(true)
+  const [displaySkillsRemove, setDisplaySkillsRemove] = useState(false)
   let {getSkills} = useContext(MentorPfrofilecontext)
 
+  const handleRemoveMentorSkill = () =>{
+    console.log("working");
+    if (displaySkillsRemove){
+      setDisplaySkillsRemove(false)
+    }else{
+      setDisplaySkillsRemove(true)
+    }
+  }
+
   const handleDisplayEditSkill = () =>{
-    console.log("its workingg");
     if (displayEditSkills){
       setDisplayEditSkills(false)
     }else{
@@ -33,12 +41,12 @@ const MentorProfileDetails = () => {
       <AboutMentor />
       <div className=' flex justify-between'>
         <MentorContactDetails />
-        <MentorSkills handleDisplayEditSkill = {handleDisplayEditSkill} />
+        <MentorSkills handleDisplayEditSkill = {handleDisplayEditSkill} handleRemoveMentorSkill={handleRemoveMentorSkill} />
         {
-          displayEditSkills && <EditMentorSkills handleDisplayEditSkill = {handleDisplayEditSkill} />
+          displayEditSkills && <EditMentorSkills  handleDisplayEditSkill = {handleDisplayEditSkill} />
         }
         {
-          displaySkillsRemove && <RemoveMentorSkills />
+          displaySkillsRemove && <RemoveMentorSkills handleRemoveMentorSkill={handleRemoveMentorSkill} />
         }
         
       </div>
