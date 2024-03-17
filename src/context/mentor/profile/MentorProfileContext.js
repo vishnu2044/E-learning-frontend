@@ -25,7 +25,6 @@ export const MentorProfileProvider = ({children}) =>{
         if (newSkill.trim() !== '') {
             setSkills([...skills, newSkill]);
             setNewSkill('');
-            console.log("skills in list format ::::::", skills);
         }
     };
 
